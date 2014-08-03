@@ -17,10 +17,17 @@
 		F3390A47198E4BDC005C86BF /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A43198E4BDC005C86BF /* Operators.swift */; };
 		F3AEBE75198E480C00EDE7F3 /* LinearAlgebraExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3AEBE7B198E480C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE6F198E480C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
-		F3AEBE9B198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework */; };
+		F3AEBE9B198E481C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F3390A48198E4C39005C86BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3AEBE66198E480C00EDE7F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3AEBE8F198E481C00EDE7F3;
+			remoteInfo = LinearAlgebraExtensions_OSX;
+		};
 		F3AEBE7C198E480C00EDE7F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F3AEBE66198E480C00EDE7F3 /* Project object */;
@@ -54,7 +61,7 @@
 		F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinearAlgebraExtensions.h; sourceTree = "<group>"; };
 		F3AEBE7A198E480C00EDE7F3 /* LinearAlgebraExtensionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinearAlgebraExtensionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AEBE80198E480C00EDE7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinearAlgebraExtensions_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinearAlgebraExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AEBE9A198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinearAlgebraExtensions_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3AEBE9B198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework in Frameworks */,
+				F3AEBE9B198E481C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +113,7 @@
 			children = (
 				F3AEBE6F198E480C00EDE7F3 /* LinearAlgebraExtensions.framework */,
 				F3AEBE7A198E480C00EDE7F3 /* LinearAlgebraExtensionsTests.xctest */,
-				F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework */,
+				F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */,
 				F3AEBE9A198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.xctest */,
 			);
 			name = Products;
@@ -221,7 +228,7 @@
 			);
 			name = LinearAlgebraExtensions_OSX;
 			productName = LinearAlgebraExtensions_OSX;
-			productReference = F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework */;
+			productReference = F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		F3AEBE99198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests */ = {
@@ -237,6 +244,7 @@
 			dependencies = (
 				F3AEBE9D198E481C00EDE7F3 /* PBXTargetDependency */,
 				F3AEBEAA198E481D00EDE7F3 /* PBXTargetDependency */,
+				F3390A49198E4C39005C86BF /* PBXTargetDependency */,
 			);
 			name = LinearAlgebraExtensions_OSXTests;
 			productName = LinearAlgebraExtensions_OSXTests;
@@ -359,6 +367,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F3390A49198E4C39005C86BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3AEBE8F198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX */;
+			targetProxy = F3390A48198E4C39005C86BF /* PBXContainerItemProxy */;
+		};
 		F3AEBE7D198E480C00EDE7F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F3AEBE6E198E480C00EDE7F3 /* LinearAlgebraExtensions */;
@@ -542,11 +555,12 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = LinearAlgebraExtensions_OSX/Info.plist;
+				INFOPLIST_FILE = LinearAlgebraExtensions/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.90;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = LinearAlgebraExtensions;
+				PRODUCT_NAME = LinearAlgebraExtensions;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -564,11 +578,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = LinearAlgebraExtensions_OSX/Info.plist;
+				INFOPLIST_FILE = LinearAlgebraExtensions/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.90;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = LinearAlgebraExtensions;
+				PRODUCT_NAME = LinearAlgebraExtensions;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -587,7 +602,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = LinearAlgebraExtensions_OSXTests/Info.plist;
+				INFOPLIST_FILE = LinearAlgebraExtensionsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.90;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -606,7 +621,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = LinearAlgebraExtensions_OSXTests/Info.plist;
+				INFOPLIST_FILE = LinearAlgebraExtensionsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.90;
 				PRODUCT_NAME = "$(TARGET_NAME)";
