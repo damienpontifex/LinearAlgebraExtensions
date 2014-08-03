@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3390A3E198E4BD2005C86BF /* MatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A3C198E4BD2005C86BF /* MatrixTests.swift */; };
+		F3390A3F198E4BD2005C86BF /* MatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A3C198E4BD2005C86BF /* MatrixTests.swift */; };
+		F3390A40198E4BD2005C86BF /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A3D198E4BD2005C86BF /* OperatorTests.swift */; };
+		F3390A41198E4BD2005C86BF /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A3D198E4BD2005C86BF /* OperatorTests.swift */; };
+		F3390A44198E4BDC005C86BF /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A42198E4BDC005C86BF /* Matrix.swift */; };
+		F3390A45198E4BDC005C86BF /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A42198E4BDC005C86BF /* Matrix.swift */; };
+		F3390A46198E4BDC005C86BF /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A43198E4BDC005C86BF /* Operators.swift */; };
+		F3390A47198E4BDC005C86BF /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A43198E4BDC005C86BF /* Operators.swift */; };
 		F3AEBE75198E480C00EDE7F3 /* LinearAlgebraExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3AEBE7B198E480C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE6F198E480C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
-		F3AEBE82198E480C00EDE7F3 /* LinearAlgebraExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AEBE81198E480C00EDE7F3 /* LinearAlgebraExtensionsTests.swift */; };
-		F3AEBE95198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = F3AEBE94198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3AEBE9B198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework */; };
-		F3AEBEA2198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AEBEA1198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,18 +45,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F3390A3C198E4BD2005C86BF /* MatrixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatrixTests.swift; sourceTree = "<group>"; };
+		F3390A3D198E4BD2005C86BF /* OperatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
+		F3390A42198E4BDC005C86BF /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		F3390A43198E4BDC005C86BF /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		F3AEBE6F198E480C00EDE7F3 /* LinearAlgebraExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinearAlgebraExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AEBE73198E480C00EDE7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinearAlgebraExtensions.h; sourceTree = "<group>"; };
 		F3AEBE7A198E480C00EDE7F3 /* LinearAlgebraExtensionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinearAlgebraExtensionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AEBE80198E480C00EDE7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F3AEBE81198E480C00EDE7F3 /* LinearAlgebraExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearAlgebraExtensionsTests.swift; sourceTree = "<group>"; };
 		F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinearAlgebraExtensions_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F3AEBE93198E481C00EDE7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F3AEBE94198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinearAlgebraExtensions_OSX.h; sourceTree = "<group>"; };
 		F3AEBE9A198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinearAlgebraExtensions_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F3AEBEA0198E481C00EDE7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F3AEBEA1198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearAlgebraExtensions_OSXTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +97,6 @@
 			children = (
 				F3AEBE71198E480C00EDE7F3 /* LinearAlgebraExtensions */,
 				F3AEBE7E198E480C00EDE7F3 /* LinearAlgebraExtensionsTests */,
-				F3AEBE91198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX */,
-				F3AEBE9E198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests */,
 				F3AEBE70198E480C00EDE7F3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,6 +115,8 @@
 		F3AEBE71198E480C00EDE7F3 /* LinearAlgebraExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				F3390A42198E4BDC005C86BF /* Matrix.swift */,
+				F3390A43198E4BDC005C86BF /* Operators.swift */,
 				F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */,
 				F3AEBE72198E480C00EDE7F3 /* Supporting Files */,
 			);
@@ -130,7 +134,8 @@
 		F3AEBE7E198E480C00EDE7F3 /* LinearAlgebraExtensionsTests */ = {
 			isa = PBXGroup;
 			children = (
-				F3AEBE81198E480C00EDE7F3 /* LinearAlgebraExtensionsTests.swift */,
+				F3390A3C198E4BD2005C86BF /* MatrixTests.swift */,
+				F3390A3D198E4BD2005C86BF /* OperatorTests.swift */,
 				F3AEBE7F198E480C00EDE7F3 /* Supporting Files */,
 			);
 			path = LinearAlgebraExtensionsTests;
@@ -140,40 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				F3AEBE80198E480C00EDE7F3 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F3AEBE91198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX */ = {
-			isa = PBXGroup;
-			children = (
-				F3AEBE94198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.h */,
-				F3AEBE92198E481C00EDE7F3 /* Supporting Files */,
-			);
-			path = LinearAlgebraExtensions_OSX;
-			sourceTree = "<group>";
-		};
-		F3AEBE92198E481C00EDE7F3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F3AEBE93198E481C00EDE7F3 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F3AEBE9E198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests */ = {
-			isa = PBXGroup;
-			children = (
-				F3AEBEA1198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.swift */,
-				F3AEBE9F198E481C00EDE7F3 /* Supporting Files */,
-			);
-			path = LinearAlgebraExtensions_OSXTests;
-			sourceTree = "<group>";
-		};
-		F3AEBE9F198E481C00EDE7F3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F3AEBEA0198E481C00EDE7F3 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -193,7 +164,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3AEBE95198E481C00EDE7F3 /* LinearAlgebraExtensions_OSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +324,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3390A44198E4BDC005C86BF /* Matrix.swift in Sources */,
+				F3390A46198E4BDC005C86BF /* Operators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +333,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3AEBE82198E480C00EDE7F3 /* LinearAlgebraExtensionsTests.swift in Sources */,
+				F3390A3E198E4BD2005C86BF /* MatrixTests.swift in Sources */,
+				F3390A40198E4BD2005C86BF /* OperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +342,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3390A45198E4BDC005C86BF /* Matrix.swift in Sources */,
+				F3390A47198E4BDC005C86BF /* Operators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,7 +351,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3AEBEA2198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.swift in Sources */,
+				F3390A3F198E4BD2005C86BF /* MatrixTests.swift in Sources */,
+				F3390A41198E4BD2005C86BF /* OperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +465,7 @@
 		F3AEBE86198E480C00EDE7F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -498,12 +475,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F3AEBE87198E480C00EDE7F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -519,6 +498,7 @@
 		F3AEBE89198E480C00EDE7F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -530,12 +510,14 @@
 				INFOPLIST_FILE = LinearAlgebraExtensionsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F3AEBE8A198E480C00EDE7F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -549,6 +531,7 @@
 		F3AEBEA4198E481C00EDE7F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -566,12 +549,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F3AEBEA5198E481C00EDE7F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
@@ -592,6 +577,7 @@
 		F3AEBEA7198E481C00EDE7F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -606,12 +592,14 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.90;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F3AEBEA8198E481C00EDE7F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -645,6 +633,7 @@
 				F3AEBE87198E480C00EDE7F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F3AEBE88198E480C00EDE7F3 /* Build configuration list for PBXNativeTarget "LinearAlgebraExtensionsTests" */ = {
 			isa = XCConfigurationList;
@@ -653,6 +642,7 @@
 				F3AEBE8A198E480C00EDE7F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F3AEBEA3198E481C00EDE7F3 /* Build configuration list for PBXNativeTarget "LinearAlgebraExtensions_OSX" */ = {
 			isa = XCConfigurationList;
@@ -661,6 +651,7 @@
 				F3AEBEA5198E481C00EDE7F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F3AEBEA6198E481C00EDE7F3 /* Build configuration list for PBXNativeTarget "LinearAlgebraExtensions_OSXTests" */ = {
 			isa = XCConfigurationList;
@@ -669,6 +660,7 @@
 				F3AEBEA8198E481C00EDE7F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

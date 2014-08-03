@@ -10,7 +10,7 @@ import Foundation
 import Accelerate
 
 extension la_object_t: Printable {
-	class func objectFromArray(array: [Array<Double>]) -> la_object_t {
+	public class func objectFromArray(array: [Array<Double>]) -> la_object_t {
 		let rows = la_count_t(array.count)
 		let columns = la_count_t(array[0].count)
 		let totalElements = Int(rows * columns)
@@ -28,7 +28,7 @@ extension la_object_t: Printable {
 		return la_matrix_from_double_buffer(pointer, rows, columns, stride, 0, 0)
 	}
 	
-	subscript(rowRange: Range<Int>, colRange: Range<Int>) -> la_object_t {
+	public subscript(rowRange: Range<Int>, colRange: Range<Int>) -> la_object_t {
 		return la_matrix_slice(self, rowRange.startIndex, colRange.startIndex, 0, 0, la_count_t(rowRange.endIndex - rowRange.startIndex), la_count_t(colRange.endIndex - colRange.startIndex))
 	}
 	
