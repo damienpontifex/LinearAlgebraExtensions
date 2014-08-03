@@ -32,3 +32,20 @@ func - (lhs: la_object_t, rhs: Double) -> la_object_t {
 	let scalarSplat = la_splat_from_double(rhs, 0)
 	return la_difference(lhs, scalarSplat)
 }
+
+func * (lhs: la_object_t, rhs: Double) -> la_object_t {
+	let scalarSplat = la_splat_from_double(rhs, 0)
+	return la_elementwise_product(lhs, scalarSplat)
+}
+
+func ^ (lhs: la_object_t, rhs: Int) -> la_object_t {
+	var result: la_object_t?
+	for var i = 1; i < rhs; i++ {
+		if !result {
+			result = la_matrix_product(lhs, lhs)
+		} else {
+			la_matrix_product(result!, lhs)
+		}
+	}
+	return result!
+}
