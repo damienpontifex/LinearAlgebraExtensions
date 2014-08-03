@@ -38,7 +38,8 @@ extension la_object_t: Printable {
 		let cols = la_matrix_cols(self)
 		
 		var buffer = UnsafePointer<Double>.alloc(Int(rows * cols))
-		la_matrix_to_double_buffer(buffer, cols, self)
+		let status = la_matrix_to_double_buffer(buffer, cols, self)
+		assertStatusIsSuccess(status)
 		
 		let outputArray = UnsafeArray<Double>(start: buffer, length: Int(rows * cols))
 		
@@ -55,5 +56,28 @@ extension la_object_t: Printable {
 		
 		return _desc
 	}
+	}
+	
+	private func assertStatusIsSuccess(status: la_status_t) {
+		switch Int32(status) {
+		case LA_WARNING_POORLY_CONDITIONED:
+			assert(false, "Poorly conditioned")
+		case LA_INTERNAL_ERROR:
+			assert(false, "Internal error")
+		case LA_INVALID_PARAMETER_ERROR:
+			assert(false, "Invalid parameter error")
+		case LA_DIMENSION_MISMATCH_ERROR:
+			assert(false, "Dimension mismatch error")
+		case LA_PRECISION_MISMATCH_ERROR:
+			assert(false, "Precision mismatch error")
+		case LA_SINGULAR_ERROR:
+			assert(false, "Singular error")
+		case LA_SLICE_OUT_OF_BOUNDS_ERROR:
+			assert(false, "Out of bounds error")
+		case LA_SUCCESS:
+			fallthrough
+		default:
+			break
+		}
 	}
 }

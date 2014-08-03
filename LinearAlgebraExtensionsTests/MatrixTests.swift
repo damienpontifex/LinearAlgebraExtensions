@@ -29,4 +29,12 @@ class MatrixTests: XCTestCase {
 		XCTAssertEqual(la_matrix_cols(matrix), 3, "Should have equals columns in 2D array and matrix")
 		XCTAssertEqual(la_matrix_rows(matrix), 3, "Should have equals rows in 2D array and matrix")
 	}
+	
+	func testMatrixDescription() {
+		let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
+		var matrix = la_object_t.objectFromArray(twoDArray)
+		
+		let description = matrix.description
+		XCTAssertNotNil(description, "Should have provided matrix description")
+	}
 }
