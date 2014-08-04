@@ -37,11 +37,7 @@ extension la_object_t: Printable {
 		let rows = la_matrix_rows(self)
 		let cols = la_matrix_cols(self)
 		
-		var buffer = UnsafePointer<Double>.alloc(Int(rows * cols))
-		let status = la_matrix_to_double_buffer(buffer, cols, self)
-		assertStatusIsSuccess(status)
-		
-		let outputArray = UnsafeArray<Double>(start: buffer, length: Int(rows * cols))
+		let outputArray = toArray()
 		
 		var _desc = ""
 		for (idx, val) in enumerate(outputArray) {
@@ -56,6 +52,18 @@ extension la_object_t: Printable {
 		
 		return _desc
 	}
+	}
+	
+	public func toArray() -> UnsafeArray<Double> {
+		let rows = la_matrix_rows(self)
+		let cols = la_matrix_cols(self)
+		
+		var buffer = UnsafePointer<Double>.alloc(Int(rows * cols))
+		let status = la_matrix_to_double_buffer(buffer, cols, self)
+		assertStatusIsSuccess(status)
+		
+		let outputArray = UnsafeArray<Double>(start: buffer, length: Int(rows * cols))
+		return outputArray
 	}
 	
 	private func assertStatusIsSuccess(status: la_status_t) {
