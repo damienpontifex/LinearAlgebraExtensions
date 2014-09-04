@@ -44,4 +44,29 @@ class OperatorTests: XCTestCase {
 		
 		var sumMatrix = matrix + matrix2
 	}
+	
+	func testPerformanceExample() {
+		
+		let squareDim = 1_000
+		let elementCount = Int(pow(Double(squareDim), Double(2.0)))
+		let initial = 0.0
+		
+		let rowDim = la_count_t(squareDim)
+		
+		var array = Array<Double>(count: elementCount, repeatedValue: initial)
+		
+		for i in 0..<squareDim {
+			array[i] = Double(arc4random_uniform(100))
+		}
+		
+		var matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+		var matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+		
+		self.measureBlock() {
+			let result = matrix * matrix2
+			
+			// Have to actually call it out for execution to occur
+			array = result.toArray()
+		}
+	}
 }
