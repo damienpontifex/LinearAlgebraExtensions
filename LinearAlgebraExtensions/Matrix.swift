@@ -9,6 +9,47 @@
 import Foundation
 import Accelerate
 
+// Matrix operations
+public func +(left: la_object_t, right: la_object_t) -> la_object_t {
+	return la_sum(left, right)
+}
+
+public func -(left: la_object_t, right: la_object_t) -> la_object_t {
+	return la_difference(left, right)
+}
+
+public func *(left: la_object_t, right: la_object_t) -> la_object_t {
+	return la_matrix_product(left, right)
+}
+
+// Scalar operations
+public func +(left: la_object_t, right: Double) -> la_object_t {
+	let scalarSplat = la_splat_from_double(right, 0)
+	return la_sum(left, scalarSplat)
+}
+
+public func -(left: la_object_t, right: Double) -> la_object_t {
+	let scalarSplat = la_splat_from_double(right, 0)
+	return la_difference(left, scalarSplat)
+}
+
+public func *(left: la_object_t, right: Double) -> la_object_t {
+	let scalarSplat = la_splat_from_double(right, 0)
+	return la_elementwise_product(left, scalarSplat)
+}
+
+public func ^(left: la_object_t, right: Int) -> la_object_t {
+	var result: la_object_t?
+	for var i = 1; i < right; i++ {
+		if result == nil {
+			result = la_matrix_product(left, left)
+		} else {
+			la_matrix_product(result!, left)
+		}
+	}
+	return result!
+}
+
 extension la_object_t: Printable {
 	public class func objectFromArray(array: [Array<Double>]) -> la_object_t {
 		let rows = la_count_t(array.count)
@@ -86,45 +127,4 @@ extension la_object_t: Printable {
 			break
 		}
 	}
-}
-
-// Matrix operations
-func + (lhs: la_object_t, rhs: la_object_t) -> la_object_t {
-	return la_sum(lhs, rhs)
-}
-
-func - (lhs: la_object_t, rhs: la_object_t) -> la_object_t {
-	return la_difference(lhs, rhs)
-}
-
-func * (lhs: la_object_t, rhs: la_object_t) -> la_object_t {
-	return la_matrix_product(lhs, rhs)
-}
-
-// Scalar operations
-func + (lhs: la_object_t, rhs: Double) -> la_object_t {
-	let scalarSplat = la_splat_from_double(rhs, 0)
-	return la_sum(lhs, scalarSplat)
-}
-
-func - (lhs: la_object_t, rhs: Double) -> la_object_t {
-	let scalarSplat = la_splat_from_double(rhs, 0)
-	return la_difference(lhs, scalarSplat)
-}
-
-func * (lhs: la_object_t, rhs: Double) -> la_object_t {
-	let scalarSplat = la_splat_from_double(rhs, 0)
-	return la_elementwise_product(lhs, scalarSplat)
-}
-
-func ^ (lhs: la_object_t, rhs: Int) -> la_object_t {
-	var result: la_object_t?
-	for var i = 1; i < rhs; i++ {
-		if result == nil {
-			result = la_matrix_product(lhs, lhs)
-		} else {
-			la_matrix_product(result!, lhs)
-		}
-	}
-	return result!
 }

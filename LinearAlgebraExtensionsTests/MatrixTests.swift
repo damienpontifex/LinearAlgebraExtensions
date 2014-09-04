@@ -32,8 +32,6 @@ class MatrixTests: XCTestCase {
 		
 		XCTAssertEqual(la_matrix_cols(matrix), 3, "Should have equals columns in 2D array and matrix")
 		XCTAssertEqual(la_matrix_rows(matrix), 3, "Should have equals rows in 2D array and matrix")
-		
-		println("************** Matrix \(matrix.toArray())")
 	}
 	
 	func testMatrixDescription() {
