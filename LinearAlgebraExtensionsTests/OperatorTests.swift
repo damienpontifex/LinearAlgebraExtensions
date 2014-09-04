@@ -59,10 +59,10 @@ class OperatorTests: XCTestCase {
 			array[i] = Double(arc4random_uniform(100))
 		}
 		
-		var matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
-		var matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
-		
 		self.measureBlock() {
+			var matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+			var matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+			
 			let result = la_matrix_product(matrix, matrix2)
 			
 			var array = Array<Double>(count: elementCount, repeatedValue: 0.0)
@@ -96,9 +96,9 @@ class OperatorTests: XCTestCase {
 		
 		measureBlock() {
 //
-//			var vsresult = [Double](count : array.count, repeatedValue : 0.0)
-//			vDSP_mmulD(&array, 1, &array, 1, &vsresult, 1, length, length, length)
-			var vsresult = array * array
+			var vsresult = [Double](count : array.count, repeatedValue : 0.0)
+			vDSP_mmulD(&array, 1, &array, 1, &vsresult, 1, length, length, length)
+//			var vsresult = array * array
 //			println("Square \(array) to get \(vsresult)")
 		}
 	}
