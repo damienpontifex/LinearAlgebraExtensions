@@ -26,8 +26,14 @@ class MatrixTests: XCTestCase {
 		let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
 		var matrix = la_object_t.objectFromArray(twoDArray)
 		
+		let rhs = 2.0
+		let scalarSplat = la_splat_from_double(rhs, 0)
+		matrix = la_elementwise_product(matrix, scalarSplat)
+		
 		XCTAssertEqual(la_matrix_cols(matrix), 3, "Should have equals columns in 2D array and matrix")
 		XCTAssertEqual(la_matrix_rows(matrix), 3, "Should have equals rows in 2D array and matrix")
+		
+		println("************** Matrix \(matrix.toArray())")
 	}
 	
 	func testMatrixDescription() {

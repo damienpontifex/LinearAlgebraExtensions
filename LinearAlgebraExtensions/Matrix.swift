@@ -19,13 +19,12 @@ extension la_object_t: Printable {
 		for (index, rowArray) in enumerate(array) {
 			grid.replaceRange(Range<Int>(start: index * rowArray.count, end: (index + 1) * rowArray.count), with: rowArray)
 		}
-		
-		var pointer = UnsafePointer<Double>.alloc(totalElements)
-		pointer.initializeFrom(grid)
-		
+
 		let stride = columns
+		var matrix: la_object_t!
+		matrix = la_matrix_from_double_buffer(&grid, rows, columns, stride, 0, 0)
 		
-		return la_matrix_from_double_buffer(pointer, rows, columns, stride, 0, 0)
+		return matrix
 	}
 	
 	public subscript(rowRange: Range<Int>, colRange: Range<Int>) -> la_object_t {
@@ -54,16 +53,15 @@ extension la_object_t: Printable {
 	}
 	}
 	
-	public func toArray() -> UnsafeArray<Double> {
+	public func toArray() -> Array<Double> {
 		let rows = la_matrix_rows(self)
 		let cols = la_matrix_cols(self)
 		
-		var buffer = UnsafePointer<Double>.alloc(Int(rows * cols))
-		let status = la_matrix_to_double_buffer(buffer, cols, self)
+		var array = Array<Double>(count: Int(rows * cols), repeatedValue: 0.0)
+		let status = la_matrix_to_double_buffer(&array, cols, self)
 		assertStatusIsSuccess(status)
-		
-		let outputArray = UnsafeArray<Double>(start: buffer, length: Int(rows * cols))
-		return outputArray
+
+		return array
 	}
 	
 	private func assertStatusIsSuccess(status: la_status_t) {
@@ -88,4 +86,45 @@ extension la_object_t: Printable {
 			break
 		}
 	}
+}
+
+// Matrix operations
+func + (lhs: la_object_t, rhs: la_object_t) -> la_object_t {
+	return la_sum(lhs, rhs)
+}
+
+func - (lhs: la_object_t, rhs: la_object_t) -> la_object_t {
+	return la_difference(lhs, rhs)
+}
+
+func * (lhs: la_object_t, rhs: la_object_t) -> la_object_t {
+	return la_matrix_product(lhs, rhs)
+}
+
+// Scalar operations
+func + (lhs: la_object_t, rhs: Double) -> la_object_t {
+	let scalarSplat = la_splat_from_double(rhs, 0)
+	return la_sum(lhs, scalarSplat)
+}
+
+func - (lhs: la_object_t, rhs: Double) -> la_object_t {
+	let scalarSplat = la_splat_from_double(rhs, 0)
+	return la_difference(lhs, scalarSplat)
+}
+
+func * (lhs: la_object_t, rhs: Double) -> la_object_t {
+	let scalarSplat = la_splat_from_double(rhs, 0)
+	return la_elementwise_product(lhs, scalarSplat)
+}
+
+func ^ (lhs: la_object_t, rhs: Int) -> la_object_t {
+	var result: la_object_t?
+	for var i = 1; i < rhs; i++ {
+		if result == nil {
+			result = la_matrix_product(lhs, lhs)
+		} else {
+			la_matrix_product(result!, lhs)
+		}
+	}
+	return result!
 }
