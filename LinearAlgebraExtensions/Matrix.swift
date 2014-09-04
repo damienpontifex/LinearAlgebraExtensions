@@ -9,6 +9,13 @@
 import Foundation
 import Accelerate
 
+public func *(var left: [Double], var right: [Double]) -> [Double] {
+	var vsresult = [Double](count : left.count, repeatedValue : 0.0)
+	var length = vDSP_Length(sqrt(Double(left.count)))
+	vDSP_mmulD(&left, 1, &right, 1, &vsresult, 1, length, length, length)
+	return vsresult
+}
+
 // Matrix operations
 public func +(left: la_object_t, right: la_object_t) -> la_object_t {
 	return la_sum(left, right)
@@ -100,7 +107,7 @@ extension la_object_t: Printable {
 		
 		var array = Array<Double>(count: Int(rows * cols), repeatedValue: 0.0)
 		let status = la_matrix_to_double_buffer(&array, cols, self)
-		assertStatusIsSuccess(status)
+//		assertStatusIsSuccess(status)
 
 		return array
 	}
