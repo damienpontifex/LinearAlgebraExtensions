@@ -37,3 +37,27 @@ Matrix element multiplication without
 let scalarSplat = la_splat_from_double(rhs, 0)
 let C = la_elementwise_product(lhs, scalarSplat)
 ```
+
+## Matrix Constructors
+
+- [Double] to column matrix
+- [Double] to row matrix
+- [[Double]] to matrix with size of the contained arrays
+- [Double] to matrix of specified row x columns
+- Ones matrix
+- Zeros matrix
+- Repeated values matrix
+
+
+## Matrix Operations
+
+- matrix * matrix : Matrix multiplication
+- matrix + matrix : Matrix addition
+- matrix - matrix : Matrix subtraction
+
+## Scalar Operations
+
+- matrix * Double : Scalar elementwise multiplication
+- matrix + Double : Scalar elementwise addition
+- matrix - Double : Scalar elementwise subtraction
+- matrix^Double : Scalar elementwise power
