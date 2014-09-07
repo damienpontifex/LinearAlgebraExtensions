@@ -58,12 +58,12 @@ public func ^(left: la_object_t, right: Int) -> la_object_t {
 }
 
 extension la_object_t: Printable {
-	public class func objectFromArray(array: [Array<Double>]) -> la_object_t {
+	public class func objectFromArray(array: [[Double]]) -> la_object_t {
 		let rows = la_count_t(array.count)
 		let columns = la_count_t(array[0].count)
 		let totalElements = Int(rows * columns)
 		
-		var grid = Array<Double>(count: totalElements, repeatedValue: 0.0)
+		var grid = [Double](count: totalElements, repeatedValue: 0.0)
 		for (index, rowArray) in enumerate(array) {
 			grid.replaceRange(Range<Int>(start: index * rowArray.count, end: (index + 1) * rowArray.count), with: rowArray)
 		}
@@ -101,11 +101,11 @@ extension la_object_t: Printable {
 	}
 	}
 	
-	public func toArray() -> Array<Double> {
+	public func toArray() -> [Double] {
 		let rows = la_matrix_rows(self)
 		let cols = la_matrix_cols(self)
 		
-		var array = Array<Double>(count: Int(rows * cols), repeatedValue: 0.0)
+		var array = [Double](count: Int(rows * cols), repeatedValue: 0.0)
 		let status = la_matrix_to_double_buffer(&array, cols, self)
 //		assertStatusIsSuccess(status)
 
