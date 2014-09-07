@@ -235,24 +235,23 @@ extension la_object_t {
 //MARK: - Printable
 extension la_object_t: Printable {
 	public var description: String {
-		get {
-			let rows = la_matrix_rows(self)
-			let cols = la_matrix_cols(self)
-			
-			let outputArray = toArray()
-			
-			var _desc = ""
-			for (idx, val) in enumerate(outputArray) {
-				_desc += val.description
-				
-				if (idx + 1) % cols == 0 {
-					_desc += "\n"
-				} else {
-					_desc += " "
+		let rows = la_matrix_rows(self)
+		let cols = la_matrix_cols(self)
+		
+		let outputArray = toArray()
+		
+		var _desc = ""
+		
+		for x in 0..<rows {
+			for y in 0..<cols {
+				_desc += outputArray[Int(y + x * cols)].description
+				if y != cols - 1 {
+					_desc += ", "
 				}
 			}
-			
-			return _desc
+			_desc += "\n"
 		}
+		
+		return _desc
 	}
 }
