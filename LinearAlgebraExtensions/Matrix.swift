@@ -50,7 +50,8 @@ public func ^(left: la_object_t, right: Int) -> la_object_t {
 	return result!
 }
 
-extension la_object_t: Printable {
+//MARK: - Object construction
+extension la_object_t {
 	
 	/**
 	Construct a la_object_t from a Swift two dimensional array
@@ -168,7 +169,10 @@ extension la_object_t: Printable {
 		let attributes = la_attribute_t(LA_DEFAULT_ATTRIBUTES)
 		return la_identity_matrix(size, scalarType, attributes)
 	}
-	
+}
+
+//MARK: - Object access
+extension la_object_t {
 	/**
 	*  Slice the matrix and return a new matrix with the specified row and column range
 	*
@@ -181,27 +185,7 @@ extension la_object_t: Printable {
 		return la_matrix_slice(self, rowRange.startIndex, colRange.startIndex, 0, 0, la_count_t(rowRange.endIndex - rowRange.startIndex), la_count_t(colRange.endIndex - colRange.startIndex))
 	}
 	
-	public var description: String {
-	get {
-		let rows = la_matrix_rows(self)
-		let cols = la_matrix_cols(self)
-		
-		let outputArray = toArray()
-		
-		var _desc = ""
-		for (idx, val) in enumerate(outputArray) {
-			_desc += val.description
-			
-			if (idx + 1) % cols == 0 {
-				_desc += "\n"
-			} else {
-				_desc += " "
-			}
-		}
-		
-		return _desc
-	}
-	}
+	
 	
 	/**
 	Generate a swift array of elements from the la_object_t instance
@@ -244,6 +228,31 @@ extension la_object_t: Printable {
 			fallthrough
 		default:
 			break
+		}
+	}
+}
+
+//MARK: - Printable
+extension la_object_t: Printable {
+	public var description: String {
+		get {
+			let rows = la_matrix_rows(self)
+			let cols = la_matrix_cols(self)
+			
+			let outputArray = toArray()
+			
+			var _desc = ""
+			for (idx, val) in enumerate(outputArray) {
+				_desc += val.description
+				
+				if (idx + 1) % cols == 0 {
+					_desc += "\n"
+				} else {
+					_desc += " "
+				}
+			}
+			
+			return _desc
 		}
 	}
 }
