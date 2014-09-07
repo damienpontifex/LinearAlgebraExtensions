@@ -162,7 +162,7 @@ extension la_object_t: Printable {
 	
 	:returns: The identity la_object_t instance to use in matrix operations
 	*/
-	public class func eye(dimension: Int = 1) -> la_object_t {
+	public class func eye(_ dimension: Int = 1) -> la_object_t {
 		let size = la_count_t(dimension)
 		let scalarType = la_scalar_type_t(LA_SCALAR_TYPE_DOUBLE)
 		let attributes = la_attribute_t(LA_DEFAULT_ATTRIBUTES)
