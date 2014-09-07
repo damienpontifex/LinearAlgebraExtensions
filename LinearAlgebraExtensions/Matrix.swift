@@ -40,7 +40,7 @@ public func *(left: la_object_t, right: Double) -> la_object_t {
 
 public func ^(left: la_object_t, right: Int) -> la_object_t {
 	var result: la_object_t?
-	for var i = 1; i < right; i++ {
+	for i in 1..<right {
 		if result == nil {
 			result = la_matrix_product(left, left)
 		} else {
