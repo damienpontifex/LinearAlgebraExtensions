@@ -156,6 +156,20 @@ extension la_object_t: Printable {
 	}
 	
 	/**
+	Construct a la_object_t identity matrix
+	
+	:param: The dimension of the square identity matrix
+	
+	:returns: The identity la_object_t instance to use in matrix operations
+	*/
+	public class func eye(dimension: Int = 1) -> la_object_t {
+		let size = la_count_t(dimension)
+		let scalarType = la_scalar_type_t(LA_SCALAR_TYPE_DOUBLE)
+		let attributes = la_attribute_t(LA_DEFAULT_ATTRIBUTES)
+		return la_identity_matrix(size, scalarType, attributes)
+	}
+	
+	/**
 	*  Slice the matrix and return a new matrix with the specified row and column range
 	*
 	*  @param Range<Int> The range of row elements to create the slice from
