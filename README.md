@@ -47,6 +47,7 @@ let C = la_elementwise_product(lhs, scalarSplat)
 - Ones matrix
 - Zeros matrix
 - Repeated values matrix
+- Identity matrix
 
 
 ## Matrix Operations
