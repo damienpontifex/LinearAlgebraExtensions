@@ -41,4 +41,19 @@ class MatrixTests: XCTestCase {
 		let description = matrix.description
 		XCTAssertNotNil(description, "Should have provided matrix description")
 	}
+	
+	func testIdentityConstructor() {
+		let identity = la_object_t.eye(5)
+		let identityArray = identity.toArray()
+		
+		for x in 0..<5 {
+			for y in 0..<5 {
+				if x == y {
+					XCTAssertEqual(identityArray[y + x * 5], 1, "Should have one on all the diagonal elements")
+				} else {
+					XCTAssertEqual(identityArray[y + x * 5], 0, "Should have zero on all the non-diagonal elements")
+				}
+			}
+		}
+	}
 }
