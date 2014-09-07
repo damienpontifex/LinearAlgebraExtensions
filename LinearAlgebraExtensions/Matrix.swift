@@ -9,14 +9,7 @@
 import Foundation
 import Accelerate
 
-public func *(var left: [Double], var right: [Double]) -> [Double] {
-	var vsresult = [Double](count : left.count, repeatedValue : 0.0)
-	var length = vDSP_Length(sqrt(Double(left.count)))
-	vDSP_mmulD(&left, 1, &right, 1, &vsresult, 1, length, length, length)
-	return vsresult
-}
-
-// Matrix operations
+//MARK: - Matrix operations
 public func +(left: la_object_t, right: la_object_t) -> la_object_t {
 	return la_sum(left, right)
 }
@@ -29,7 +22,7 @@ public func *(left: la_object_t, right: la_object_t) -> la_object_t {
 	return la_matrix_product(left, right)
 }
 
-// Scalar operations
+//MARK: - Scalar operations
 public func +(left: la_object_t, right: Double) -> la_object_t {
 	let scalarSplat = la_splat_from_double(right, 0)
 	return la_sum(left, scalarSplat)
@@ -58,6 +51,14 @@ public func ^(left: la_object_t, right: Int) -> la_object_t {
 }
 
 extension la_object_t: Printable {
+	
+	/**
+	Construct a la_object_t from a Swift two dimensional array
+	
+	:param: array The array of elements from which to construct the la_object
+	
+	:returns: The la_object_t instance to use in matrix operations
+	*/
 	public class func objectFromArray(array: [[Double]]) -> la_object_t {
 		let rows = la_count_t(array.count)
 		let columns = la_count_t(array[0].count)
@@ -75,6 +76,14 @@ extension la_object_t: Printable {
 		return matrix
 	}
 	
+	/**
+	*  Slice the matrix and return a new matrix with the specified row and column range
+	*
+	*  @param Range<Int> The range of row elements to create the slice from
+	*  @param Range<Int> The range of column elements to create the slice from
+	*
+	*  @return A new la_object_t instance with the subset of the original object from the specified rows and columns
+	*/
 	public subscript(rowRange: Range<Int>, colRange: Range<Int>) -> la_object_t {
 		return la_matrix_slice(self, rowRange.startIndex, colRange.startIndex, 0, 0, la_count_t(rowRange.endIndex - rowRange.startIndex), la_count_t(colRange.endIndex - colRange.startIndex))
 	}
@@ -101,6 +110,11 @@ extension la_object_t: Printable {
 	}
 	}
 	
+	/**
+	Generate a swift array of elements from the la_object_t instance
+	
+	:returns: A one dimensional swift array with all the elements from the la_object_t instance
+	*/
 	public func toArray() -> [Double] {
 		let rows = la_matrix_rows(self)
 		let cols = la_matrix_cols(self)
@@ -112,6 +126,11 @@ extension la_object_t: Printable {
 		return array
 	}
 	
+	/**
+	la_status_t to friendly string converter
+	
+	:param: status The status returned from the matrix operation
+	*/
 	private func assertStatusIsSuccess(status: la_status_t) {
 		switch Int32(status) {
 		case LA_WARNING_POORLY_CONDITIONED:
