@@ -60,7 +60,7 @@ extension la_object_t {
 	
 	:returns: The la_object_t instance to use in matrix operations
 	*/
-	public class func objectFromArray(array: [[Double]]) -> la_object_t {
+	final public class func objectFromArray(array: [[Double]]) -> la_object_t {
 		let rows = array.count
 		let columns = array[0].count
 		let totalElements = Int(rows * columns)
@@ -82,7 +82,7 @@ extension la_object_t {
 	
 	:returns: The la_object_t instance to use in matrix operations
 	*/
-	public class func columnMatrixFromArray(var array: [Double]) -> la_object_t {
+	final public class func columnMatrixFromArray(var array: [Double]) -> la_object_t {
 		return matrixFromArray(array, rows: array.count, columns: 1)
 	}
 	
@@ -93,7 +93,7 @@ extension la_object_t {
 	
 	:returns: The la_object_t instance to use in matrix operations
 	*/
-	public class func rowMatrixFromArray(var array: [Double]) -> la_object_t {
+	final public class func rowMatrixFromArray(var array: [Double]) -> la_object_t {
 		return matrixFromArray(array, rows: 1, columns: array.count)
 	}
 	
@@ -106,7 +106,7 @@ extension la_object_t {
 	
 	:returns: The la_object_t instance to use in matrix operations
 	*/
-	public class func matrixFromArray(var array: [Double], rows: Int, columns: Int) -> la_object_t {
+	final public class func matrixFromArray(var array: [Double], rows: Int, columns: Int) -> la_object_t {
 		let columns = la_count_t(columns)
 		let rows = la_count_t(rows)
 		let totalElements = Int(rows * columns)
@@ -127,7 +127,7 @@ extension la_object_t {
 	
 	:returns: The la_object_t instance to use in matrix operations
 	*/
-	public class func matrixWithRepeatedValue(value: Double, rows: Int = 1, columns: Int = 1) -> la_object_t {
+	final public class func matrixWithRepeatedValue(value: Double, rows: Int = 1, columns: Int = 1) -> la_object_t {
 		var matrixArray = [Double](count: rows * columns, repeatedValue: value)
 		return matrixFromArray(matrixArray, rows: rows, columns: columns)
 	}
@@ -140,7 +140,7 @@ extension la_object_t {
 	
 	:returns: The la_object_t instance to use in matrix operations
 	*/
-	public class func ones(rows: Int = 1, columns: Int = 1) -> la_object_t {
+	final public class func ones(rows: Int = 1, columns: Int = 1) -> la_object_t {
 		return matrixWithRepeatedValue(1.0, rows: rows, columns: columns)
 	}
 	
@@ -152,7 +152,7 @@ extension la_object_t {
 	
 	:returns: The la_object_t instance to use in matrix operations
 	*/
-	public class func zeros(rows: Int = 1, columns: Int = 1) -> la_object_t {
+	final public class func zeros(rows: Int = 1, columns: Int = 1) -> la_object_t {
 		return matrixWithRepeatedValue(0.0, rows: rows, columns: columns)
 	}
 	
@@ -163,7 +163,7 @@ extension la_object_t {
 	
 	:returns: The identity la_object_t instance to use in matrix operations
 	*/
-	public class func eye(_ dimension: Int = 1) -> la_object_t {
+	final public class func eye(_ dimension: Int = 1) -> la_object_t {
 		let size = la_count_t(dimension)
 		let scalarType = la_scalar_type_t(LA_SCALAR_TYPE_DOUBLE)
 		let attributes = la_attribute_t(LA_DEFAULT_ATTRIBUTES)
@@ -181,7 +181,7 @@ extension la_object_t {
 	*
 	*  @return A new la_object_t instance with the subset of the original object from the specified rows and columns
 	*/
-	public subscript(rowRange: Range<Int>, colRange: Range<Int>) -> la_object_t {
+	final public subscript(rowRange: Range<Int>, colRange: Range<Int>) -> la_object_t {
 		return la_matrix_slice(self, rowRange.startIndex, colRange.startIndex, 0, 0, la_count_t(rowRange.endIndex - rowRange.startIndex), la_count_t(colRange.endIndex - colRange.startIndex))
 	}
 	
@@ -192,7 +192,7 @@ extension la_object_t {
 	
 	:returns: A one dimensional swift array with all the elements from the la_object_t instance
 	*/
-	public func toArray() -> [Double] {
+	final public func toArray() -> [Double] {
 		let rows = la_matrix_rows(self)
 		let cols = la_matrix_cols(self)
 		
@@ -208,7 +208,7 @@ extension la_object_t {
 	
 	:param: status The status returned from the matrix operation
 	*/
-	private func assertStatusIsSuccess(status: la_status_t) {
+	final private func assertStatusIsSuccess(status: la_status_t) {
 		switch Int32(status) {
 		case LA_WARNING_POORLY_CONDITIONED:
 			assert(false, "Poorly conditioned")
