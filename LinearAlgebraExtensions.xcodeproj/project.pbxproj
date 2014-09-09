@@ -18,6 +18,8 @@
 		F3AEBE75198E480C00EDE7F3 /* LinearAlgebraExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3AEBE7B198E480C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE6F198E480C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
 		F3AEBE9B198E481C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
+		F3CC099119BEDA64006A73FA /* OperatorPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CC099019BEDA64006A73FA /* OperatorPerformanceTests.swift */; };
+		F3CC099219BEDA94006A73FA /* OperatorPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CC099019BEDA64006A73FA /* OperatorPerformanceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,7 @@
 		F3AEBE80198E480C00EDE7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinearAlgebraExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AEBE9A198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinearAlgebraExtensions_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3CC099019BEDA64006A73FA /* OperatorPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorPerformanceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +147,7 @@
 				F3390A3C198E4BD2005C86BF /* MatrixTests.swift */,
 				F3390A3D198E4BD2005C86BF /* OperatorTests.swift */,
 				F3AEBE7F198E480C00EDE7F3 /* Supporting Files */,
+				F3CC099019BEDA64006A73FA /* OperatorPerformanceTests.swift */,
 			);
 			path = LinearAlgebraExtensionsTests;
 			sourceTree = "<group>";
@@ -342,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3390A3E198E4BD2005C86BF /* MatrixTests.swift in Sources */,
+				F3CC099119BEDA64006A73FA /* OperatorPerformanceTests.swift in Sources */,
 				F3390A40198E4BD2005C86BF /* OperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3390A3F198E4BD2005C86BF /* MatrixTests.swift in Sources */,
+				F3CC099219BEDA94006A73FA /* OperatorPerformanceTests.swift in Sources */,
 				F3390A41198E4BD2005C86BF /* OperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
