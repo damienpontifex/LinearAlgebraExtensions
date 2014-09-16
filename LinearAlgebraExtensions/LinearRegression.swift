@@ -9,14 +9,29 @@
 import Foundation
 import Accelerate
 
+/**
+*  Class to calculate linear regression of a set of data points
+*/
 public class LinearRegression {
 	
-	var m: Int
-	var x: la_object_t
-	var y: la_object_t
-	var theta: la_object_t
-	var alpha: Double
-	var numIterations: Int
+	private var m: Int
+	private var x: la_object_t
+	private var y: la_object_t
+	private var theta: la_object_t
+	private var alpha: Double
+	private var numIterations: Int
+	
+	/**
+	Initialise the LinearRegression object
+	
+	:param: x             Input data values
+	:param: y             Expected output values
+	:param: theta         Initial theta value
+	:param: alpha         Learning rate
+	:param: numIterations Number of iterations to run the algorithm
+	
+	:returns: Instance of the LinearRegression
+	*/
 	public init(_ x: [Double], _ y: [Double], theta: [Double] = [0.0, 0.0], alpha: Double = 0.001, numIterations: Int = 1500) {
 		self.m = x.count
 		
@@ -34,6 +49,13 @@ public class LinearRegression {
 		self.numIterations = numIterations
 	}
 	
+	/**
+	Run the gradient descent algorithm for linear regression
+	
+	:param: returnCostHistory Boolean value to indicate whether the cost history should be returned. Some performance hit if this is true due to doing array computations in every iteration rather than just at the end
+	
+	:returns: Tuple of theta values and optional jHistory parameter if requested
+	*/
 	public func gradientDescent(returnCostHistory: Bool = false) -> (theta: [Double], jHistory: [Double]?) {
 		
 		// Number of training examples
@@ -65,6 +87,11 @@ public class LinearRegression {
 		return (theta: thetaArray, jHistory: jHistory)
 	}
 	
+	/**
+	Computes the cost with our current values of theta
+	
+	:returns: Cost value for the data with value of theta
+	*/
 	public func computeCost() -> Double {
 		
 		let twoM = 2.0 * Double(m)
