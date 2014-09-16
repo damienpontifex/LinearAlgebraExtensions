@@ -10,12 +10,15 @@ import Foundation
 import Accelerate
 
 public class LinearRegression {
-	public class func gradientDescent(x: [Double], _ y: [Double], theta: [Double] = [0.0, 0.0], alpha: Double = 0.001, numIterations: Int = 1500) -> [Double] {
-		
-		assert(x.count == y.count, "Should have matching value count in x and y ")
-		
-		let m = x.count
-		let alphaOverM = alpha / Double(m)
+	
+	var m: Int
+	var x: la_object_t
+	var y: la_object_t
+	var theta: la_object_t
+	var alpha: Double
+	var numIterations: Int
+	public init(_ x: [Double], _ y: [Double], theta: [Double] = [0.0, 0.0], alpha: Double = 0.001, numIterations: Int = 1500) {
+		self.m = x.count
 		
 		var xValues = Array<Double>(count: m * 2, repeatedValue: 1.0)
 		for i in stride(from: 0, to: x.count * 2, by: 2) {
@@ -23,22 +26,60 @@ public class LinearRegression {
 		}
 		var xMatrix = la_object_t.matrixFromArray(xValues, rows: m, columns: 2)
 		
-		let onesColumn = la_object_t.ones(columns: x.count)
-
-		let yMatrix = la_object_t.columnMatrixFromArray(y)
-		var thetaMatrix = la_object_t.rowMatrixFromArray(theta)
+		self.x = xMatrix
 		
-		for iter in 0..<numIterations {
-			let prediction = xMatrix * thetaMatrix
-			let errors = prediction - yMatrix
-			
-			let partial = la_transpose(la_transpose(errors) * xMatrix) * alphaOverM
-			
-			thetaMatrix = thetaMatrix - partial
+		self.y = la_object_t.columnMatrixFromArray(y)
+		self.theta = la_object_t.rowMatrixFromArray(theta)
+		self.alpha = alpha
+		self.numIterations = numIterations
+	}
+	
+	public func gradientDescent(returnCostHistory: Bool = false) -> (theta: [Double], jHistory: [Double]?) {
+		
+		// Number of training examples
+		let alphaOverM = alpha / Double(m)
+		
+		var jHistory: [Double]?
+		if returnCostHistory {
+			jHistory = Array<Double>(count: numIterations, repeatedValue: 0.0)
 		}
 		
-		let thetaArray = thetaMatrix.toArray()
+		for iter in 0..<numIterations {
+			// h(x) = transpose(theta) * x
+			let prediction = x * theta
+			let errors = prediction - y
+			
+			let partial = la_transpose(la_transpose(errors) * x) * alphaOverM
+			
+			// Simultaneous theta update:
+			// theta_j = theta_j - alpha / m * sum_{i=1}^m (h_theta(x^(i)) - y^(i)) * x_j^(i)
+			theta = theta - partial
+			
+			if returnCostHistory {
+				jHistory![iter] = computeCost()
+			}
+		}
 		
-		return thetaArray
+		let thetaArray = theta.toArray()
+		
+		return (theta: thetaArray, jHistory: jHistory)
+	}
+	
+	public func computeCost() -> Double {
+		
+		let twoM = 2.0 * Double(m)
+		
+		let xTheta = x * theta
+		let diff = xTheta - y
+		
+		var partial = diff^2
+		partial = partial / twoM
+		
+		let partialArray = partial.toArray()
+		let sum = partialArray.reduce(0.0, combine: { result, val in
+			return result + val
+		})
+		
+		return sum
 	}
 }
