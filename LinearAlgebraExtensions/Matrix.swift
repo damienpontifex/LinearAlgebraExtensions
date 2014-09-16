@@ -38,6 +38,10 @@ public func *(left: la_object_t, right: Double) -> la_object_t {
 	return la_elementwise_product(left, scalarSplat)
 }
 
+public func /(left: la_object_t, right: Double) -> la_object_t {
+	return left * (1.0 / right)
+}
+
 public func ^(left: la_object_t, right: Int) -> la_object_t {
 	var result: la_object_t?
 	for i in 1..<right {
