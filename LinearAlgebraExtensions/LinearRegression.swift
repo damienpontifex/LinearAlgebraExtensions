@@ -88,6 +88,11 @@ public class LinearRegression {
 		return (theta: thetaArray, jHistory: jHistory)
 	}
 	
+	/**
+	Calculate theta values using the normal equations.
+	
+	:returns: Double array with theta coefficients
+	*/
 	public func normalEquations() -> [Double] {
 		// 𝜃 = inverse(X' * X) * X' * y
 		// Equivalent to (X' * X) * 𝜃 = X' * y hence can use la_solve
