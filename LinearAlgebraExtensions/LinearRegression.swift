@@ -89,7 +89,10 @@ public class LinearRegression {
 	}
 	
 	public func normalEquations() -> [Double] {
+		// 𝜃 = inverse(X' * X) * X' * y
+		// Equivalent to (X' * X) * 𝜃 = X' * y hence can use la_solve
 		var newTheta = la_solve(la_transpose(x) * x, la_transpose(x) * y)
+		
 		return newTheta.toArray()
 	}
 	
