@@ -40,7 +40,7 @@ public class LinearRegression {
 			xValues[i] = x[i / 2]
 		}
 		
-		var xMatrix = la_matrix_from_double_array(xValues, m, 2)
+		var xMatrix = la_matrix_from_double_array(xValues, rows: m, columns: 2)
 		
 		self.x = xMatrix
 		

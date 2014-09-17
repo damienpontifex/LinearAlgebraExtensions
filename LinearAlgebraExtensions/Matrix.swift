@@ -54,7 +54,16 @@ public func ^(left: la_object_t, right: Int) -> la_object_t {
 	return result!
 }
 
-public func la_matrix_from_double_array(var array: [Double], rows: Int, columns: Int) -> la_object_t {
+/**
+Construct a la_object_t for a matrix of dimensions rows x columns
+
+:param: The array to use as the elements of the matrix
+:param: The number of rows to construct the matrix
+:param: The number of columns to construct the matrix
+
+:returns: The la_object_t instance to use in matrix operations
+*/
+public func la_matrix_from_double_array(var array: [Double], rows rows: Int, columns columns: Int) -> la_object_t {
 	let columns = la_count_t(columns)
 	let rows = la_count_t(rows)
 	let totalElements = Int(rows * columns)
@@ -88,7 +97,7 @@ extension la_object_t {
 			grid.replaceRange(replacementRange, with: rowArray)
 		}
 		
-		return matrixFromArray(grid, rows: rows, columns: columns)
+		return la_matrix_from_double_array(grid, rows: rows, columns: columns)
 	}
 	
 	/**
@@ -99,7 +108,7 @@ extension la_object_t {
 	:returns: The la_object_t instance to use in matrix operations
 	*/
 	final public class func columnMatrixFromArray(var array: [Double]) -> la_object_t {
-		return matrixFromArray(array, rows: array.count, columns: 1)
+		return la_matrix_from_double_array(array, rows: array.count, columns: 1)
 	}
 	
 	/**
@@ -110,28 +119,7 @@ extension la_object_t {
 	:returns: The la_object_t instance to use in matrix operations
 	*/
 	final public class func rowMatrixFromArray(var array: [Double]) -> la_object_t {
-		return matrixFromArray(array, rows: 1, columns: array.count)
-	}
-	
-	/**
-	Construct a la_object_t for a matrix of dimensions rows x columns
-	
-	:param: The array to use as the elements of the matrix
-	:param: The number of rows to construct the matrix
-	:param: The number of columns to construct the matrix
-	
-	:returns: The la_object_t instance to use in matrix operations
-	*/
-	final public class func matrixFromArray(var array: [Double], rows: Int, columns: Int) -> la_object_t {
-		let columns = la_count_t(columns)
-		let rows = la_count_t(rows)
-		let totalElements = Int(rows * columns)
-		
-		let stride = columns
-		var matrix: la_object_t!
-		matrix = la_matrix_from_double_buffer(&array, rows, columns, stride, 0, 0)
-		
-		return matrix
+		return la_matrix_from_double_array(array, rows: 1, columns: array.count)
 	}
 	
 	/**
@@ -145,7 +133,7 @@ extension la_object_t {
 	*/
 	final public class func matrixWithRepeatedValue(value: Double, rows: Int = 1, columns: Int = 1) -> la_object_t {
 		var matrixArray = [Double](count: rows * columns, repeatedValue: value)
-		return matrixFromArray(matrixArray, rows: rows, columns: columns)
+		return la_matrix_from_double_array(matrixArray, rows: rows, columns: columns)
 	}
 	
 	/**
