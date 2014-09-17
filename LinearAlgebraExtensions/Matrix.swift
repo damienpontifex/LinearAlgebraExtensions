@@ -54,6 +54,18 @@ public func ^(left: la_object_t, right: Int) -> la_object_t {
 	return result!
 }
 
+public func la_matrix_from_double_array(var array: [Double], rows: Int, columns: Int) -> la_object_t {
+	let columns = la_count_t(columns)
+	let rows = la_count_t(rows)
+	let totalElements = Int(rows * columns)
+	
+	let stride = columns
+	var matrix: la_object_t!
+	matrix = la_matrix_from_double_buffer(&array, rows, columns, stride, 0, 0)
+	
+	return matrix
+}
+
 //MARK: - Object construction
 extension la_object_t {
 	
@@ -203,7 +215,7 @@ extension la_object_t {
 		var array = [Double](count: Int(rows * cols), repeatedValue: 0.0)
 		let status = la_matrix_to_double_buffer(&array, cols, self)
 //		assertStatusIsSuccess(status)
-
+		
 		return array
 	}
 	

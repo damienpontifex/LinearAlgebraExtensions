@@ -39,7 +39,8 @@ public class LinearRegression {
 		for i in stride(from: 0, to: x.count * 2, by: 2) {
 			xValues[i] = x[i / 2]
 		}
-		var xMatrix = la_object_t.matrixFromArray(xValues, rows: m, columns: 2)
+		
+		var xMatrix = la_matrix_from_double_array(xValues, m, 2)
 		
 		self.x = xMatrix
 		
@@ -102,11 +103,6 @@ public class LinearRegression {
 		var partial = diff^2
 		partial = partial / twoM
 		
-		let partialArray = partial.toArray()
-		let sum = partialArray.reduce(0.0, combine: { result, val in
-			return result + val
-		})
-		
-		return sum
+		return partial.toArray().first!
 	}
 }

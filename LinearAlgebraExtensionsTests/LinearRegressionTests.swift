@@ -31,8 +31,8 @@ class LinearRegressionTests: XCTestCase {
 		
 		println("Initial cost \(linear.computeCost())")
 		
-		let results = linear.gradientDescent(returnCostHistory: true)
+		let results = linear.gradientDescent()
 		
-		println("*** Theta result \(results)")
+		println("*** Theta result \(results.theta)")
     }
 }

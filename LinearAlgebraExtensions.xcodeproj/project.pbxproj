@@ -14,7 +14,6 @@
 		F3390A44198E4BDC005C86BF /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A42198E4BDC005C86BF /* Matrix.swift */; };
 		F3390A45198E4BDC005C86BF /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3390A42198E4BDC005C86BF /* Matrix.swift */; };
 		F3390A4B198E50D7005C86BF /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F3390A4A198E50D7005C86BF /* README.md */; };
-		F3390A4C198E50D7005C86BF /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F3390A4A198E50D7005C86BF /* README.md */; };
 		F3AEBE75198E480C00EDE7F3 /* LinearAlgebraExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3AEBE7B198E480C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE6F198E480C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
 		F3AEBE9B198E481C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
@@ -365,7 +364,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3390A4C198E50D7005C86BF /* README.md in Sources */,
 				F3390A45198E4BDC005C86BF /* Matrix.swift in Sources */,
 				F3DC12DE19C8671200F9E101 /* LinearRegression.swift in Sources */,
 			);
@@ -576,7 +574,7 @@
 				INFOPLIST_FILE = LinearAlgebraExtensions/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.90;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_MODULE_NAME = LinearAlgebraExtensions;
 				PRODUCT_NAME = LinearAlgebraExtensions;
 				SDKROOT = macosx;
@@ -599,7 +597,7 @@
 				INFOPLIST_FILE = LinearAlgebraExtensions/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.90;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_MODULE_NAME = LinearAlgebraExtensions;
 				PRODUCT_NAME = LinearAlgebraExtensions;
 				SDKROOT = macosx;
@@ -622,7 +620,7 @@
 				);
 				INFOPLIST_FILE = LinearAlgebraExtensionsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.90;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -641,7 +639,7 @@
 				);
 				INFOPLIST_FILE = LinearAlgebraExtensionsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.90;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
