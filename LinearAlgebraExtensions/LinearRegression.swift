@@ -44,8 +44,8 @@ public class LinearRegression {
 		
 		self.x = xMatrix
 		
-		self.y = la_object_t.columnMatrixFromArray(y)
-		self.theta = la_object_t.rowMatrixFromArray(theta)
+		self.y = la_vector_column_from_double_array(y)
+		self.theta = la_vector_row_from_double_array(theta)
 		self.alpha = alpha
 		self.numIterations = numIterations
 	}

@@ -75,6 +75,66 @@ public func la_matrix_from_double_array(var array: [Double], #rows: Int, #column
 	return matrix
 }
 
+/**
+Construct a la_object_t for a column matrix of size array.count x 1
+
+:param: The array to use as the elements of the column matrix
+
+:returns: The la_object_t instance to use in matrix operations
+*/
+public func la_vector_column_from_double_array(var array: [Double]) -> la_object_t {
+	return la_matrix_from_double_array(array, rows: array.count, columns: 1)
+}
+
+/**
+Construct a la_object_t for a row matrix of size 1 x array.count
+
+:param: The array to use as the elements of the column matrix
+
+:returns: The la_object_t instance to use in matrix operations
+*/
+public func la_vector_row_from_double_array(var array: [Double]) -> la_object_t {
+	return la_matrix_from_double_array(array, rows: 1, columns: array.count)
+}
+
+/**
+Construct a la_object_t for a matrix of repeated values with dimensions rows x columns
+
+:param: The array to use as the elements of the matrix
+:param: The number of rows to construct the matrix, defaults to one
+:param: The number of columns to construct the matrix, defaults to one
+
+:returns: The la_object_t instance to use in matrix operations
+*/
+public func la_constant_matrix(value: Double, rows: Int = 1, columns: Int = 1) -> la_object_t {
+	var matrixArray = [Double](count: rows * columns, repeatedValue: value)
+	return la_matrix_from_double_array(matrixArray, rows: rows, columns: columns)
+}
+
+/**
+Construct a la_object_t for a matrix with all elements set to 0.0 of dimensions rows x columns
+
+:param: The number of rows to construct the matrix, defaults to one
+:param: The number of columns to construct the matrix, defaults to one
+
+:returns: The la_object_t instance to use in matrix operations
+*/
+public func la_zero_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
+	return la_constant_matrix(0.0, rows: rows, columns: columns)
+}
+
+/**
+Construct a la_object_t for a matrix with all elements set to 1.0 of dimensions rows x columns
+
+:param: The number of rows to construct the matrix, defaults to one
+:param: The number of columns to construct the matrix, defaults to one
+
+:returns: The la_object_t instance to use in matrix operations
+*/
+public func la_ones_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
+	return la_constant_matrix(1.0, rows: rows, columns: columns)
+}
+
 //MARK: - Object construction
 extension la_object_t {
 	
@@ -98,66 +158,6 @@ extension la_object_t {
 		}
 		
 		return la_matrix_from_double_array(grid, rows: rows, columns: columns)
-	}
-	
-	/**
-	Construct a la_object_t for a column matrix of size array.count x 1
-	
-	:param: The array to use as the elements of the column matrix
-	
-	:returns: The la_object_t instance to use in matrix operations
-	*/
-	final public class func columnMatrixFromArray(var array: [Double]) -> la_object_t {
-		return la_matrix_from_double_array(array, rows: array.count, columns: 1)
-	}
-	
-	/**
-	Construct a la_object_t for a row matrix of size 1 x array.count
-	
-	:param: The array to use as the elements of the column matrix
-	
-	:returns: The la_object_t instance to use in matrix operations
-	*/
-	final public class func rowMatrixFromArray(var array: [Double]) -> la_object_t {
-		return la_matrix_from_double_array(array, rows: 1, columns: array.count)
-	}
-	
-	/**
-	Construct a la_object_t for a matrix of repeated values with dimensions rows x columns
-	
-	:param: The array to use as the elements of the matrix
-	:param: The number of rows to construct the matrix, defaults to one
-	:param: The number of columns to construct the matrix, defaults to one
-	
-	:returns: The la_object_t instance to use in matrix operations
-	*/
-	final public class func matrixWithRepeatedValue(value: Double, rows: Int = 1, columns: Int = 1) -> la_object_t {
-		var matrixArray = [Double](count: rows * columns, repeatedValue: value)
-		return la_matrix_from_double_array(matrixArray, rows: rows, columns: columns)
-	}
-	
-	/**
-	Construct a la_object_t for a matrix with all elements set to 1.0 of dimensions rows x columns
-	
-	:param: The number of rows to construct the matrix, defaults to one
-	:param: The number of columns to construct the matrix, defaults to one
-	
-	:returns: The la_object_t instance to use in matrix operations
-	*/
-	final public class func ones(rows: Int = 1, columns: Int = 1) -> la_object_t {
-		return matrixWithRepeatedValue(1.0, rows: rows, columns: columns)
-	}
-	
-	/**
-	Construct a la_object_t for a matrix with all elements set to 0.0 of dimensions rows x columns
-	
-	:param: The number of rows to construct the matrix, defaults to one
-	:param: The number of columns to construct the matrix, defaults to one
-	
-	:returns: The la_object_t instance to use in matrix operations
-	*/
-	final public class func zeros(rows: Int = 1, columns: Int = 1) -> la_object_t {
-		return matrixWithRepeatedValue(0.0, rows: rows, columns: columns)
 	}
 	
 	/**
