@@ -63,7 +63,7 @@ Construct a la_object_t for a matrix of dimensions rows x columns
 
 :returns: The la_object_t instance to use in matrix operations
 */
-public func la_matrix_from_double_array(var array: [Double], rows rows: Int, columns columns: Int) -> la_object_t {
+public func la_matrix_from_double_array(var array: [Double], #rows: Int, #columns: Int) -> la_object_t {
 	let columns = la_count_t(columns)
 	let rows = la_count_t(rows)
 	let totalElements = Int(rows * columns)
