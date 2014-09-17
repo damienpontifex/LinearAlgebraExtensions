@@ -88,6 +88,11 @@ public class LinearRegression {
 		return (theta: thetaArray, jHistory: jHistory)
 	}
 	
+	public func normalEquations() -> [Double] {
+		var newTheta = la_solve(la_transpose(x) * x, la_transpose(x) * y)
+		return newTheta.toArray()
+	}
+	
 	/**
 	Computes the cost with our current values of theta
 	
