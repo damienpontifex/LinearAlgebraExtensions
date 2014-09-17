@@ -32,7 +32,7 @@ public class LinearRegression {
 	
 	:returns: Instance of the LinearRegression
 	*/
-	public init(_ x: [Double], _ y: [Double], theta: [Double] = [0.0, 0.0], alpha: Double = 0.001, numIterations: Int = 1500) {
+	public init(_ x: [Double], _ y: [Double], theta: [Double]? = nil, alpha: Double = 0.001, numIterations: Int = 1500) {
 		self.m = x.count
 		
 		var xValues = Array<Double>(count: m * 2, repeatedValue: 1.0)
@@ -45,7 +45,12 @@ public class LinearRegression {
 		self.x = xMatrix
 		
 		self.y = la_vector_column_from_double_array(y)
-		self.theta = la_vector_row_from_double_array(theta)
+		var thetaArray = theta
+		if thetaArray == nil {
+			// Default the theta array to zeros with appropriate size of x array
+			thetaArray = Array<Double>(count: Int(2), repeatedValue: 0.0)
+		}
+		self.theta = la_vector_row_from_double_array(thetaArray!)
 		self.alpha = alpha
 		self.numIterations = numIterations
 	}
