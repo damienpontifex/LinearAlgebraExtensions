@@ -177,6 +177,58 @@ extension la_object_t {
 
 //MARK: - Object access
 extension la_object_t {
+	
+	/// Convenience accessor for row count
+	final public var rows: Int {
+		return Int(la_matrix_rows(self))
+	}
+
+	/// Convenience accessor for column count
+	final public var cols: Int {
+		return Int(la_matrix_cols(self))
+	}
+
+	/**
+	Merge two matrices by columns with the second being placed before self
+	
+	:param: secondMat The matrix to prepend
+	
+	:returns: The merged matrix
+	*/
+	final public func prependColumnsFrom(secondMat: la_object_t) -> la_object_t {
+		return secondMat.appendColumnsFrom(self)
+	}
+	
+	/**
+	Merge two matrices by columns with the second being placed after self
+	
+	:param: secondMat The matrix to append
+	
+	:returns: The merged matrix
+	*/
+	final public func appendColumnsFrom(secondMat: la_object_t) -> la_object_t {
+		var selfT = la_transpose(self)
+		var secondT = la_transpose(secondMat)
+		
+		var selfArr = self.toArray()
+		selfArr.extend(secondT.toArray())
+		
+		var end = la_matrix_from_double_array(selfArr, rows: self.cols + secondMat.cols, columns: self.rows)
+		return la_transpose(end)
+	}
+	
+	final public func addColumnOf(val: Double) -> la_object_t {
+		var rows = la_matrix_rows(self)
+		var cols = la_matrix_cols(self)
+		
+		var transposedOrig = la_transpose(self)
+		var transposedArr = transposedOrig.toArray()
+		var zeros = Array<Double>(count: Int(rows), repeatedValue: val)
+		zeros.extend(transposedArr)
+		var zermat = la_matrix_from_double_array(zeros, rows: Int(cols + 1), columns: Int(rows))
+		return la_transpose(zermat)
+	}
+	
 	/**
 	*  Slice the matrix and return a new matrix with the specified row and column range
 	*
@@ -188,8 +240,6 @@ extension la_object_t {
 	final public subscript(rowRange: Range<Int>, colRange: Range<Int>) -> la_object_t {
 		return la_matrix_slice(self, rowRange.startIndex, colRange.startIndex, 0, 0, la_count_t(rowRange.endIndex - rowRange.startIndex), la_count_t(colRange.endIndex - colRange.startIndex))
 	}
-	
-	
 	
 	/**
 	Generate a swift array of elements from the la_object_t instance
