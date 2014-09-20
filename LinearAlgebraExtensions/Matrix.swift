@@ -207,6 +207,9 @@ extension la_object_t {
 	:returns: The merged matrix
 	*/
 	final public func appendColumnsFrom(secondMat: la_object_t) -> la_object_t {
+		
+		assert(self.rows == secondMat.rows, "Cannot append columns from matrices of two different row dimensions")
+		
 		var selfT = la_transpose(self)
 		var secondT = la_transpose(secondMat)
 		
@@ -235,11 +238,10 @@ extension la_object_t {
 	:returns: A one dimensional swift array with all the elements from the la_object_t instance
 	*/
 	final public func toArray() -> [Double] {
-		let rows = la_matrix_rows(self)
-		let cols = la_matrix_cols(self)
+		var array = [Double](count: rows * cols, repeatedValue: 0.0)
 		
-		var array = [Double](count: Int(rows * cols), repeatedValue: 0.0)
-		let status = la_matrix_to_double_buffer(&array, cols, self)
+		let status = la_matrix_to_double_buffer(&array, la_count_t(cols), self)
+		
 //		assertStatusIsSuccess(status)
 		
 		return array
@@ -277,8 +279,6 @@ extension la_object_t {
 //MARK: - Printable
 extension la_object_t {
 	final public func description() -> String {
-		let rows = la_matrix_rows(self)
-		let cols = la_matrix_cols(self)
 		
 		let outputArray = toArray()
 		
