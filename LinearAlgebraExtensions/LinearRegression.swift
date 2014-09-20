@@ -21,6 +21,34 @@ public class LinearRegression {
 	private var alpha: Double
 	private var numIterations: Int
 	
+	public init(_ x: la_object_t, _ y: la_object_t, theta: la_object_t? = nil, alpha: Double = 0.001, numIterations: Int = 1500) {
+		self.m = Int(la_matrix_rows(x))
+		let cols = Int(la_matrix_cols(x))
+		
+		let ones = la_ones_matrix(rows: Int(la_matrix_rows(x)))
+		self.x = x.prependColumnsFrom(ones)
+		
+		let xMat = x.toArray()
+		var xValues = Array<Double>(count: m * (cols + 1), repeatedValue: 1.0)
+		for i in 0..<m {
+			
+			let originalRow = xMat[(i * cols)...(i * cols + 1)]
+			let replacementRange = Range<Int>(start: i * (cols + 1), end: i * (cols + 1) + 1)
+			xValues.replaceRange(replacementRange, with: originalRow)
+		}
+		
+		self.x = x
+		self.y = y
+		
+		if theta != nil {
+			self.theta = theta!
+		} else {
+			self.theta = la_zero_matrix(columns: Int(la_matrix_cols(x) + 1))
+		}
+		self.alpha = alpha
+		self.numIterations = numIterations
+	}
+	
 	/**
 	Initialise the LinearRegression object
 	

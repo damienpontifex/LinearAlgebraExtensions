@@ -169,21 +169,7 @@ class MatrixTests: XCTestCase {
 		XCTAssertEqual(newArray, expectedResult, "Expecting given array")
 	}
 	
-	//MARK: - Column append/prepend
-	func testNewFunction() {
-		// Extend the values so it takes more time, for better comparison
-		for _ in 0..<5 {
-			x2.extend(x2)
-		}
-		let cols = 2
-		var m = x2.count / 2
-		var xMat = la_matrix_from_double_array(x2, rows: m, columns: cols)
-		
-		measureBlock {
-			var newMat = xMat.addColumnOf(1.0)
-		}
-	}
-	
+	//MARK: - Column append/prepend	
 	func testMergeFunction() {
 		// Extend the values so it takes more time, for better comparison
 		for _ in 0..<5 {
