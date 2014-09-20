@@ -139,8 +139,8 @@ class LinearRegressionTests: XCTestCase {
 		
 		let results = linear.gradientDescent()
 
-		XCTAssertEqualWithAccuracy(results.theta[0], -3.630291, 0.5, "Should have this for first element")
-		XCTAssertEqualWithAccuracy(results.theta[1], 1.166362, 0.5, "Should have this for second element")
+		XCTAssertEqualWithAccuracy(results.theta[0], 1.166362, 0.5, "Should have this for first element")
+		XCTAssertEqualWithAccuracy(results.theta[1], -3.630291, 0.5, "Should have this for second element")
     }
 	
 	func testNormalEquation() {

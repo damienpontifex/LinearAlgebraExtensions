@@ -21,7 +21,7 @@ public class LinearRegression {
 	private var alpha: Double
 	private var numIterations: Int
 	
-	public init(_ x: la_object_t, _ y: la_object_t, theta: la_object_t? = nil, alpha: Double = 0.001, numIterations: Int = 1500) {
+	public init(_ x: la_object_t, _ y: la_object_t, theta: la_object_t? = nil, alpha: Double = 0.01, numIterations: Int = 1500) {
 		self.m = Int(la_matrix_rows(x))
 		let cols = Int(la_matrix_cols(x))
 		
@@ -60,7 +60,7 @@ public class LinearRegression {
 	
 	:returns: Instance of the LinearRegression
 	*/
-	public init(_ x: [Double], _ y: [Double], theta: [Double]? = nil, alpha: Double = 0.001, numIterations: Int = 1500) {
+	public init(_ x: [Double], _ y: [Double], theta: [Double]? = nil, alpha: Double = 0.01, numIterations: Int = 1500) {
 		self.m = x.count
 		
 		var xValues = Array<Double>(count: m * 2, repeatedValue: 1.0)
@@ -104,8 +104,8 @@ public class LinearRegression {
 			// h(x) = transpose(theta) * x
 			let prediction = x * theta
 			let errors = prediction - y
-			
-			let partial = la_transpose(la_transpose(errors) * x) * alphaOverM
+			let sum = la_transpose(errors) * x
+			let partial = la_transpose(sum) * alphaOverM
 			
 			// Simultaneous theta update:
 			// theta_j = theta_j - alpha / m * sum_{i=1}^m (h_theta(x^(i)) - y^(i)) * x_j^(i)
