@@ -134,8 +134,8 @@ class MatrixTests: XCTestCase {
 	func testMatrixDescription() {
 		let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
 		var matrix = la_object_t.objectFromArray(twoDArray)
-		
-		let description = matrix.description
+		println(matrix.description())
+		let description = matrix.description()
 		XCTAssertNotNil(description, "Should have provided matrix description")
 	}
 	
@@ -169,7 +169,7 @@ class MatrixTests: XCTestCase {
 		XCTAssertEqual(newArray, expectedResult, "Expecting given array")
 	}
 	
-	//MARK: - Column append/prepend	
+	//MARK: - Column append/prepend
 	func testMergeFunction() {
 		// Extend the values so it takes more time, for better comparison
 		for _ in 0..<5 {

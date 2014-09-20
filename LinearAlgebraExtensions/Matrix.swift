@@ -217,18 +217,6 @@ extension la_object_t {
 		return la_transpose(end)
 	}
 	
-	final public func addColumnOf(val: Double) -> la_object_t {
-		var rows = la_matrix_rows(self)
-		var cols = la_matrix_cols(self)
-		
-		var transposedOrig = la_transpose(self)
-		var transposedArr = transposedOrig.toArray()
-		var zeros = Array<Double>(count: Int(rows), repeatedValue: val)
-		zeros.extend(transposedArr)
-		var zermat = la_matrix_from_double_array(zeros, rows: Int(cols + 1), columns: Int(rows))
-		return la_transpose(zermat)
-	}
-	
 	/**
 	*  Slice the matrix and return a new matrix with the specified row and column range
 	*
@@ -287,8 +275,8 @@ extension la_object_t {
 }
 
 //MARK: - Printable
-extension la_object_t: Printable {
-	public var description: String {
+extension la_object_t {
+	final public func description() -> String {
 		let rows = la_matrix_rows(self)
 		let cols = la_matrix_cols(self)
 		
