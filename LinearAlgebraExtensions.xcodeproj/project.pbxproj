@@ -17,6 +17,8 @@
 		F3AEBE75198E480C00EDE7F3 /* LinearAlgebraExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3AEBE7B198E480C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE6F198E480C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
 		F3AEBE9B198E481C00EDE7F3 /* LinearAlgebraExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */; };
+		F3C398DB19D6AAAD00F659FD /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C398DA19D6AAAD00F659FD /* NeuralNetwork.swift */; };
+		F3C398DC19D6AB2A00F659FD /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C398DA19D6AAAD00F659FD /* NeuralNetwork.swift */; };
 		F3CC099119BEDA64006A73FA /* OperatorPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CC099019BEDA64006A73FA /* OperatorPerformanceTests.swift */; };
 		F3CC099219BEDA94006A73FA /* OperatorPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CC099019BEDA64006A73FA /* OperatorPerformanceTests.swift */; };
 		F3DC12DD19C8671200F9E101 /* LinearRegression.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DC12DC19C8671200F9E101 /* LinearRegression.swift */; };
@@ -68,6 +70,7 @@
 		F3AEBE80198E480C00EDE7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3AEBE90198E481C00EDE7F3 /* LinearAlgebraExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinearAlgebraExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AEBE9A198E481C00EDE7F3 /* LinearAlgebraExtensions_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinearAlgebraExtensions_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3C398DA19D6AAAD00F659FD /* NeuralNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeuralNetwork.swift; sourceTree = "<group>"; };
 		F3CC099019BEDA64006A73FA /* OperatorPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorPerformanceTests.swift; sourceTree = "<group>"; };
 		F3DC12DC19C8671200F9E101 /* LinearRegression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearRegression.swift; sourceTree = "<group>"; };
 		F3DFB10D19C86E9F0028A63F /* LinearRegressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearRegressionTests.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 				F3AEBE74198E480C00EDE7F3 /* LinearAlgebraExtensions.h */,
 				F3AEBE72198E480C00EDE7F3 /* Supporting Files */,
 				F3DC12DC19C8671200F9E101 /* LinearRegression.swift */,
+				F3C398DA19D6AAAD00F659FD /* NeuralNetwork.swift */,
 			);
 			path = LinearAlgebraExtensions;
 			sourceTree = "<group>";
@@ -346,6 +350,7 @@
 				F3390A4B198E50D7005C86BF /* README.md in Sources */,
 				F3390A44198E4BDC005C86BF /* Matrix.swift in Sources */,
 				F3DC12DD19C8671200F9E101 /* LinearRegression.swift in Sources */,
+				F3C398DB19D6AAAD00F659FD /* NeuralNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +371,7 @@
 			files = (
 				F3390A45198E4BDC005C86BF /* Matrix.swift in Sources */,
 				F3DC12DE19C8671200F9E101 /* LinearRegression.swift in Sources */,
+				F3C398DC19D6AB2A00F659FD /* NeuralNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
