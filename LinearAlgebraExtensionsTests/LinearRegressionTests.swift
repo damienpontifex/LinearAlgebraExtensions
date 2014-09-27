@@ -143,6 +143,17 @@ class LinearRegressionTests: XCTestCase {
 		XCTAssertEqualWithAccuracy(results.theta[1], -3.630291, 0.5, "Should have this for second element")
     }
 	
+	func testMultiVariateLinearRegression() {
+		let x2Mat = la_matrix_from_double_array(x2, rows: y2.count, columns: 2)
+		let y2Mat = la_matrix_from_double_array(y2, rows: y2.count, columns: 1)
+		
+		let linear = LinearRegression(x2Mat, y2Mat, numIterations: 400)
+		
+		let results = linear.gradientDescent(returnCostHistory: true)
+		
+		println(results)
+	}
+	
 	func testNormalEquation() {
 		
 		let linear = LinearRegression(x, y)
@@ -151,13 +162,4 @@ class LinearRegressionTests: XCTestCase {
 		XCTAssertEqualWithAccuracy(theta[1], -3.630291, 0.5, "Should have this for first element")
 		XCTAssertEqualWithAccuracy(theta[0], 1.166362, 0.5, "Should have this for second element")
 	}
-	
-	//MARK: - Multiple variable
-//	func testMultiVariableRegression() {
-//		let xMat = la_object_t.objectFromArray(x2)
-////		let xMat = la_matrix_from_double_array(x2, rows: x2.count / 2, columns: 2)
-//		let yMat = la_vector_column_from_double_array(y2)
-//		
-//		let linear = LinearRegression(xMat, yMat)
-//	}
 }

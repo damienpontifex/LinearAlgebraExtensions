@@ -81,6 +81,10 @@ public class LinearRegression {
 	*/
 	public func gradientDescent(returnCostHistory: Bool = false) -> (theta: [Double], jHistory: [Double]?) {
 		
+		println("initial theta \(theta.description())")
+		println(x.description())
+		println(y.description())
+		
 		// Number of training examples
 		let alphaOverM = alpha / Double(m)
 		
@@ -99,6 +103,8 @@ public class LinearRegression {
 			// Simultaneous theta update:
 			// theta_j = theta_j - alpha / m * sum_{i=1}^m (h_theta(x^(i)) - y^(i)) * x_j^(i)
 			theta = theta - partial
+			
+			println("next theta \(theta.description())")
 			
 			if returnCostHistory {
 				jHistory![iter] = computeCost()
