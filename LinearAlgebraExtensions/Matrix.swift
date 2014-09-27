@@ -124,6 +124,25 @@ public func la_zero_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
 }
 
 /**
+Construct a la_object_t for a matrix with random numbers between 0.0 and 1.0 of dimensions rows x columns
+
+:param: The number of rows to construct the matrix, defaults to one
+:param: The number of columns to construct the matrix, defaults to one
+
+:returns: The la_object_t instance to use in matrix operations
+*/
+public func la_rand_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
+	var values = Array<Double>(count: rows * columns, repeatedValue: 0.0)
+	let max = Double(UInt32.max)
+	
+	for i in 0..<rows*columns {
+		values[i] = Double(arc4random()) / max
+	}
+	
+	return la_matrix_from_double_array(values, rows: rows, columns: columns)
+}
+
+/**
 Construct a la_object_t for a matrix with all elements set to 1.0 of dimensions rows x columns
 
 :param: The number of rows to construct the matrix, defaults to one
