@@ -127,8 +127,8 @@ class MatrixTests: XCTestCase {
 		let scalarSplat = la_splat_from_double(rhs, 0)
 		matrix = la_elementwise_product(matrix, scalarSplat)
 		
-		XCTAssertEqual(la_matrix_cols(matrix), 3, "Should have equals columns in 2D array and matrix")
-		XCTAssertEqual(la_matrix_rows(matrix), 3, "Should have equals rows in 2D array and matrix")
+		XCTAssertEqual(la_matrix_cols(matrix), la_count_t(3), "Should have equals columns in 2D array and matrix")
+		XCTAssertEqual(la_matrix_rows(matrix), la_count_t(3), "Should have equals rows in 2D array and matrix")
 	}
 	
 	func testMatrixDescription() {
