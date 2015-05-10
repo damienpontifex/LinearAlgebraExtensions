@@ -282,18 +282,16 @@ extension la_object_t {
 		
 		let outputArray = toArray()
 		
-		var _desc = ""
+        let rowDescriptions = map(0..<rows) { x -> String in
+            let valDescriptions = map(0..<self.cols) { y -> String in
+                outputArray[Int(y + x * self.cols)].description
+            }
+            let commaJoinedVals = ", ".join(valDescriptions)
+            return commaJoinedVals
+        }
+        
+        let rowsJoinedByLine = "\n".join(rowDescriptions)
 		
-		for x in 0..<rows {
-			for y in 0..<cols {
-				_desc += outputArray[Int(y + x * cols)].description
-				if y != cols - 1 {
-					_desc += ", "
-				}
-			}
-			_desc += "\n"
-		}
-		
-		return _desc
+		return rowsJoinedByLine
 	}
 }
