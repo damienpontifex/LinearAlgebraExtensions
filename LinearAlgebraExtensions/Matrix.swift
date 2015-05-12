@@ -241,6 +241,15 @@ extension la_object_t {
 		
 		return array
 	}
+    
+    final public subscript(x: Int, y: Int) -> Double? {
+        if x >= 0 && x < rows && y >= 0 && y < cols {
+            let slice = la_matrix_slice(self, x, y, 0, 0, 1, 1)
+            return slice.toArray().first
+        }
+        
+        return nil
+    }
 	
 	/**
 	la_status_t to friendly string converter

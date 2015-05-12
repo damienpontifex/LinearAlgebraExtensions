@@ -118,6 +118,16 @@ class MatrixTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    func testSubscriptAccess() {
+        let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
+        var matrix = la_object_t.objectFromArray(twoDArray)
+        
+        XCTAssertNil(matrix[-1, -1])
+        
+        XCTAssertEqual(matrix[0, 0]!, 1.0, "Should have accessed first element")
+        XCTAssertEqual(matrix[1, 2]!, 6.0)
+    }
 
 	func testConstructorFromArray() {
 		let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
