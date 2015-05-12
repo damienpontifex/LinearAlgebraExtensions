@@ -166,15 +166,10 @@ extension la_object_t {
 	*/
 	final public class func objectFromArray(array: [[Double]]) -> la_object_t {
 		let rows = array.count
-		let columns = array[0].count
+		let columns = array.first?.count ?? 1
 		let totalElements = Int(rows * columns)
-		
-		// Flatten out the array
-		var grid = [Double](count: totalElements, repeatedValue: 0.0)
-		for (index, rowArray) in enumerate(array) {
-			let replacementRange = Range<Int>(start: index * rowArray.count, end: (index + 1) * rowArray.count)
-			grid.replaceRange(replacementRange, with: rowArray)
-		}
+        
+        let grid = array.flatMap { $0 }
 		
 		return la_matrix_from_double_array(grid, rows: rows, columns: columns)
 	}
@@ -196,6 +191,49 @@ extension la_object_t {
 
 //MARK: - Object access
 extension la_object_t {
+	
+	/// Convenience accessor for row count
+	final public var rows: Int {
+		return Int(la_matrix_rows(self))
+	}
+
+	/// Convenience accessor for column count
+	final public var cols: Int {
+		return Int(la_matrix_cols(self))
+	}
+
+	/**
+	Merge two matrices by columns with the second being placed before self
+	
+	:param: secondMat The matrix to prepend
+	
+	:returns: The merged matrix
+	*/
+	final public func prependColumnsFrom(secondMat: la_object_t) -> la_object_t {
+		return secondMat.appendColumnsFrom(self)
+	}
+	
+	/**
+	Merge two matrices by columns with the second being placed after self
+	
+	:param: secondMat The matrix to append
+	
+	:returns: The merged matrix
+	*/
+	final public func appendColumnsFrom(secondMat: la_object_t) -> la_object_t {
+		
+		assert(self.rows == secondMat.rows, "Cannot append columns from matrices of two different row dimensions")
+		
+		var selfT = la_transpose(self)
+		var secondT = la_transpose(secondMat)
+		
+		var selfArr = self.toArray()
+		selfArr.extend(secondT.toArray())
+		
+		var end = la_matrix_from_double_array(selfArr, rows: self.cols + secondMat.cols, columns: self.rows)
+		return la_transpose(end)
+	}
+	
 	/**
 	*  Slice the matrix and return a new matrix with the specified row and column range
 	*
@@ -208,23 +246,29 @@ extension la_object_t {
 		return la_matrix_slice(self, rowRange.startIndex, colRange.startIndex, 0, 0, la_count_t(rowRange.endIndex - rowRange.startIndex), la_count_t(colRange.endIndex - colRange.startIndex))
 	}
 	
-	
-	
 	/**
 	Generate a swift array of elements from the la_object_t instance
 	
 	:returns: A one dimensional swift array with all the elements from the la_object_t instance
 	*/
 	final public func toArray() -> [Double] {
-		let rows = la_matrix_rows(self)
-		let cols = la_matrix_cols(self)
+		var array = [Double](count: rows * cols, repeatedValue: 0.0)
 		
-		var array = [Double](count: Int(rows * cols), repeatedValue: 0.0)
-		let status = la_matrix_to_double_buffer(&array, cols, self)
+		let status = la_matrix_to_double_buffer(&array, la_count_t(cols), self)
+		
 //		assertStatusIsSuccess(status)
 		
 		return array
 	}
+    
+    final public subscript(x: Int, y: Int) -> Double? {
+        if x >= 0 && x < rows && y >= 0 && y < cols {
+            let slice = la_matrix_slice(self, x, y, 0, 0, 1, 1)
+            return slice.toArray().first
+        }
+        
+        return nil
+    }
 	
 	/**
 	la_status_t to friendly string converter
@@ -256,25 +300,21 @@ extension la_object_t {
 }
 
 //MARK: - Printable
-extension la_object_t: Printable {
-	public var description: String {
-		let rows = la_matrix_rows(self)
-		let cols = la_matrix_cols(self)
+extension la_object_t {
+	final public func description() -> String {
 		
 		let outputArray = toArray()
 		
-		var _desc = ""
+        let rowDescriptions = map(0..<rows) { x -> String in
+            let valDescriptions = map(0..<self.cols) { y -> String in
+                outputArray[Int(y + x * self.cols)].description
+            }
+            let commaJoinedVals = ", ".join(valDescriptions)
+            return commaJoinedVals
+        }
+        
+        let rowsJoinedByLine = "\n".join(rowDescriptions)
 		
-		for x in 0..<rows {
-			for y in 0..<cols {
-				_desc += outputArray[Int(y + x * cols)].description
-				if y != cols - 1 {
-					_desc += ", "
-				}
-			}
-			_desc += "\n"
-		}
-		
-		return _desc
+		return rowsJoinedByLine
 	}
 }

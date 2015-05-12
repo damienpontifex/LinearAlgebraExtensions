@@ -19,8 +19,8 @@ class OperatorTests: XCTestCase {
 		
 		var multiplyMatrix = matrix * matrix2
 		
-		XCTAssertEqual(la_matrix_cols(multiplyMatrix), 3, "Should have same dimension result")
-		XCTAssertEqual(la_matrix_rows(multiplyMatrix), 3, "Should have same dimension result")
+		XCTAssertEqual(la_matrix_cols(multiplyMatrix), la_count_t(3), "Should have same dimension result")
+		XCTAssertEqual(la_matrix_rows(multiplyMatrix), la_count_t(3), "Should have same dimension result")
 		
 		var result = multiplyMatrix.toArray()
 		

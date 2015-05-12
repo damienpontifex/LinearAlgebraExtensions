@@ -21,6 +21,23 @@ public class LinearRegression {
 	private var alpha: Double
 	private var numIterations: Int
 	
+	public init(_ x: la_object_t, _ y: la_object_t, theta: la_object_t? = nil, alpha: Double = 0.01, numIterations: Int = 1500) {
+		self.m = Int(la_matrix_rows(x))
+		let cols = Int(la_matrix_cols(x))
+		
+		let ones = la_ones_matrix(rows: Int(la_matrix_rows(x)))
+		self.x = x.prependColumnsFrom(ones)
+		self.y = y
+		
+		if theta != nil {
+			self.theta = theta!
+		} else {
+			self.theta = la_zero_matrix(columns: Int(la_matrix_cols(self.x)))
+		}
+		self.alpha = alpha
+		self.numIterations = numIterations
+	}
+	
 	/**
 	Initialise the LinearRegression object
 	
@@ -32,7 +49,7 @@ public class LinearRegression {
 	
 	:returns: Instance of the LinearRegression
 	*/
-	public init(_ x: [Double], _ y: [Double], theta: [Double] = [0.0, 0.0], alpha: Double = 0.001, numIterations: Int = 1500) {
+	public init(_ x: [Double], _ y: [Double], theta: [Double]? = nil, alpha: Double = 0.01, numIterations: Int = 1500) {
 		self.m = x.count
 		
 		var xValues = Array<Double>(count: m * 2, repeatedValue: 1.0)
@@ -45,7 +62,12 @@ public class LinearRegression {
 		self.x = xMatrix
 		
 		self.y = la_vector_column_from_double_array(y)
-		self.theta = la_vector_row_from_double_array(theta)
+		var thetaArray = theta
+		if thetaArray == nil {
+			// Default the theta array to zeros with appropriate size of x array
+			thetaArray = Array<Double>(count: Int(2), repeatedValue: 0.0)
+		}
+		self.theta = la_vector_row_from_double_array(thetaArray!)
 		self.alpha = alpha
 		self.numIterations = numIterations
 	}
@@ -59,6 +81,10 @@ public class LinearRegression {
 	*/
 	public func gradientDescent(returnCostHistory: Bool = false) -> (theta: [Double], jHistory: [Double]?) {
 		
+		println("initial theta \(theta.description())")
+		println(x.description())
+		println(y.description())
+		
 		// Number of training examples
 		let alphaOverM = alpha / Double(m)
 		
@@ -71,12 +97,14 @@ public class LinearRegression {
 			// h(x) = transpose(theta) * x
 			let prediction = x * theta
 			let errors = prediction - y
-			
-			let partial = la_transpose(la_transpose(errors) * x) * alphaOverM
+			let sum = la_transpose(errors) * x
+			let partial = la_transpose(sum) * alphaOverM
 			
 			// Simultaneous theta update:
 			// theta_j = theta_j - alpha / m * sum_{i=1}^m (h_theta(x^(i)) - y^(i)) * x_j^(i)
 			theta = theta - partial
+			
+			println("next theta \(theta.description())")
 			
 			if returnCostHistory {
 				jHistory![iter] = computeCost()
