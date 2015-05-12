@@ -147,15 +147,10 @@ extension la_object_t {
 	*/
 	final public class func objectFromArray(array: [[Double]]) -> la_object_t {
 		let rows = array.count
-		let columns = array[0].count
+		let columns = array.first?.count ?? 1
 		let totalElements = Int(rows * columns)
-		
-		// Flatten out the array
-		var grid = [Double](count: totalElements, repeatedValue: 0.0)
-		for (index, rowArray) in enumerate(array) {
-			let replacementRange = Range<Int>(start: index * rowArray.count, end: (index + 1) * rowArray.count)
-			grid.replaceRange(replacementRange, with: rowArray)
-		}
+        
+        let grid = array.flatMap { $0 }
 		
 		return la_matrix_from_double_array(grid, rows: rows, columns: columns)
 	}
