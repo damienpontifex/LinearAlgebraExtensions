@@ -9,10 +9,10 @@
 import Foundation
 import Accelerate
 
-func sigmoid(z: la_object_t) -> la_object_t {
-	let g = 1.0 / (1.0 + exp(-1.0 * z))
-	return g
-}
+//func sigmoid(z: la_object_t) -> la_object_t {
+//	let g = 1.0 / (1.0 + exp(-1.0 * z))
+//	return g
+//}
 
 class NeuralNetwork {
 	
