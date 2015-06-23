@@ -31,10 +31,10 @@ class NeuralNetwork {
 		self.outputLayerSize = outputSize
 		
 		// theta1 should be of dimensions hiddenLayerSize x (inputLayerSize + 1)
-		theta1 = la_rand_matrix(rows: self.hiddenLayerSize, columns: self.inputLayerSize + 1)
+		theta1 = la_rand_matrix(rows: self.hiddenLayerSize, columns: self.inputLayerSize + 1, numberGenerator: NumberGenerators.NormalDistribution())
 		
 		// theta2 should be of dimensions outputLayerSize x (hiddenLayerSize + 1)
-		theta2 = la_rand_matrix(rows: self.outputLayerSize, columns: self.hiddenLayerSize + 1)
+		theta2 = la_rand_matrix(rows: self.outputLayerSize, columns: self.hiddenLayerSize + 1, numberGenerator: NumberGenerators.NormalDistribution())
 	}
 	
 	func nnCostFunction(x: la_object_t, y: la_object_t, lambda: Double) {

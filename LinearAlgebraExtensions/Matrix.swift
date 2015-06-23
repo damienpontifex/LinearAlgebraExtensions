@@ -9,6 +9,29 @@
 import Foundation
 import Accelerate
 
+public typealias NumberGenerator = () -> (Double)
+public struct NumberGenerators {
+	static func UniformDistribution() -> Double {
+		return Double(arc4random()) / Double(UInt32.max)
+	}
+	
+	static func NormalDistribution(mu: Double = 0.0, sigma: Double = 1.0) -> NumberGenerator {
+		return { idx in
+			let u1 = NumberGenerators.UniformDistribution()
+			let u2 = NumberGenerators.UniformDistribution()
+			let f1 = sqrt(-2 * log(u1));
+			let f2 = 2 * M_PI * u2;
+			let g1 = f1 * cos(f2); // gaussian distribution
+			let g2 = f1 * sin(f2); // gaussian distribution
+			return g1 * sigma + mu
+		}
+	}
+}
+//	case NormalDistribution(Double, Double) = { _ in
+//		return 
+//	}
+
+
 //MARK: - Matrix operations
 public func +(left: la_object_t, right: la_object_t) -> la_object_t {
 	return la_sum(left, right)
@@ -131,13 +154,16 @@ Construct a la_object_t for a matrix with random numbers between 0.0 and 1.0 of 
 
 :returns: The la_object_t instance to use in matrix operations
 */
-public func la_rand_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
-	var values = Array<Double>(count: rows * columns, repeatedValue: 0.0)
+public func la_rand_matrix(rows: Int = 1, columns: Int = 1, numberGenerator: NumberGenerator = NumberGenerators.UniformDistribution) -> la_object_t {
 	let max = Double(UInt32.max)
 	
-	for i in 0..<rows*columns {
-		values[i] = Double(arc4random()) / max
+	let values = map(stride(from: 0, through: rows*columns, by: 1)) { _ in
+		numberGenerator()
 	}
+//		{
+//		
+//		Double(arc4random()) / Double(UInt32.max)
+//	}
 	
 	return la_matrix_from_double_array(values, rows: rows, columns: columns)
 }
