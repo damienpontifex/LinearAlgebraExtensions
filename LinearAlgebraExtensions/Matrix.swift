@@ -27,10 +27,6 @@ public struct NumberGenerators {
 		}
 	}
 }
-//	case NormalDistribution(Double, Double) = { _ in
-//		return 
-//	}
-
 
 //MARK: - Matrix operations
 public func +(left: la_object_t, right: la_object_t) -> la_object_t {
