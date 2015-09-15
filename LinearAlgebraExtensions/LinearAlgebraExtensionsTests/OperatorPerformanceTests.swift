@@ -27,14 +27,14 @@ class OperatorPerformanceTests: XCTestCase {
 		}
 		
 		measureBlock {
-			var matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
-			var matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+			let matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+			let matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 			
 			let result = la_matrix_product(matrix, matrix2)
 			
 			// Have to actually call it out for execution to occur
 			var outArray = Array<Double>(count: elementCount, repeatedValue: 0.0)
-			let status = la_matrix_to_double_buffer(&outArray, rowDim, result)
+			_ = la_matrix_to_double_buffer(&outArray, rowDim, result)
 		}
 	}
 	
@@ -54,14 +54,14 @@ class OperatorPerformanceTests: XCTestCase {
 		}
 		
 		measureBlock {
-			var matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
-			var matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+			let matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+			let matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 			
 			let result = matrix * matrix2
 			
 			// Have to actually call it out for execution to occur
 			var array = Array<Double>(count: elementCount, repeatedValue: 0.0)
-			let status = la_matrix_to_double_buffer(&array, rowDim, result)
+			_ = la_matrix_to_double_buffer(&array, rowDim, result)
 		}
 	}
 	
@@ -80,14 +80,14 @@ class OperatorPerformanceTests: XCTestCase {
 			array[i] = Double(arc4random_uniform(100))
 		}
 		
-		var matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
-		var matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+		let matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+		let matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 		
 		let result = la_matrix_product(matrix, matrix2)
 		
 		measureBlock {
 			// Have to actually call it out for execution to occur
-			var array = result.toArray()
+			_ = result.toArray()
 		}
 	}
 	
@@ -105,14 +105,14 @@ class OperatorPerformanceTests: XCTestCase {
 			array[i] = Double(arc4random_uniform(100))
 		}
 		
-		var matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
-		var matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+		let matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+		let matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 		
 		measureBlock {
 			let result = matrix * matrix2
 			
 			// Have to actually call it out for execution to occur
-			var array = result.toArray()
+			_ = result.toArray()
 		}
 	}
 	
@@ -122,7 +122,7 @@ class OperatorPerformanceTests: XCTestCase {
 		let elementCount = Int(pow(Double(squareDim), Double(2.0)))
 		let initial = 0.0
 		
-		let rowDim = vDSP_Stride(squareDim)
+		_ = vDSP_Stride(squareDim)
 		let length = vDSP_Length(squareDim)
 		
 		var array = [Double](count: elementCount, repeatedValue: initial)

@@ -166,16 +166,16 @@ class MatrixTests: XCTestCase {
 	
 	func testPrependingColumn() {
 		
-		var x = [2.0, 2.0, 3.0, 3.0]
+		let x = [2.0, 2.0, 3.0, 3.0]
 		let cols = 2
 		let rows = 2
-		var xMat = la_matrix_from_double_array(x, rows: rows, columns: cols)
-		var ones = la_ones_matrix(xMat.rows)
-		var newMat = xMat.prependColumnsFrom(ones)
+		let xMat = la_matrix_from_double_array(x, rows: rows, columns: cols)
+		let ones = la_ones_matrix(xMat.rows)
+		let newMat = xMat.prependColumnsFrom(ones)
 		
-		var newArray = newMat.toArray()
+		let newArray = newMat.toArray()
 
-		var expectedResult = [1.0, 2.0, 2.0, 1.0, 3.0, 3.0]
+		let expectedResult = [1.0, 2.0, 2.0, 1.0, 3.0, 3.0]
 		XCTAssertEqual(newArray, expectedResult, "Expecting given array")
 	}
 	
@@ -186,12 +186,12 @@ class MatrixTests: XCTestCase {
 			x2.appendContentsOf(x2)
 		}
 		let cols = 2
-		var m = x2.count / 2
-		var xMat = la_matrix_from_double_array(x2, rows: m, columns: cols)
-		var ones = la_ones_matrix(xMat.rows)
+		let m = x2.count / 2
+		let xMat = la_matrix_from_double_array(x2, rows: m, columns: cols)
+		let ones = la_ones_matrix(xMat.rows)
 		
 		measureBlock {
-			var newMat = ones.appendColumnsFrom(xMat)
+			_ = ones.appendColumnsFrom(xMat)
 		}
 	}
 }

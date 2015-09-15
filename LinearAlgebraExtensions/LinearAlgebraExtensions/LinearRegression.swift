@@ -59,7 +59,7 @@ public class LinearRegression: NSObject {
 			xValues[i] = x[i / 2]
 		}
 		
-		var xMatrix = la_matrix_from_double_array(xValues, rows: m, columns: 2)
+		let xMatrix = la_matrix_from_double_array(xValues, rows: m, columns: 2)
 		
 		self.x = xMatrix
 		

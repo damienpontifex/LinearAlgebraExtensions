@@ -43,7 +43,7 @@ class NeuralNetwork: NSObject {
 		// Set the number of samples we have
 		m = x.rows
 		
-		for i in 0..<m {
+		for _ in 0..<m {
 			
 		}
 	}

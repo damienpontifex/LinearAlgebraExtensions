@@ -22,7 +22,7 @@ public struct NumberGenerators {
 			let f1 = sqrt(-2 * log(u1));
 			let f2 = 2 * M_PI * u2;
 			let g1 = f1 * cos(f2); // gaussian distribution
-			let g2 = f1 * sin(f2); // gaussian distribution
+			_ = f1 * sin(f2); // gaussian distribution
 			return g1 * sigma + mu
 		}
 	}
@@ -63,7 +63,7 @@ public func /(left: la_object_t, right: Double) -> la_object_t {
 
 public func ^(left: la_object_t, right: Int) -> la_object_t {
 	var result: la_object_t?
-	for i in 1..<right {
+	for _ in 1..<right {
 		if result == nil {
 			result = la_matrix_product(left, left)
 		} else {
@@ -85,7 +85,6 @@ Construct a la_object_t for a matrix of dimensions rows x columns
 public func la_matrix_from_double_array(var array: [Double], rows: Int, columns: Int) -> la_object_t {
 	let columns = la_count_t(columns)
 	let rows = la_count_t(rows)
-	let totalElements = Int(rows * columns)
 	
 	let stride = columns
 	var matrix: la_object_t!
@@ -151,15 +150,10 @@ Construct a la_object_t for a matrix with random numbers between 0.0 and 1.0 of 
 - returns: The la_object_t instance to use in matrix operations
 */
 public func la_rand_matrix(rows: Int = 1, columns: Int = 1, numberGenerator: NumberGenerator = NumberGenerators.UniformDistribution) -> la_object_t {
-	let max = Double(UInt32.max)
 	
 	let values = (0..<rows*columns).map { _ in
 		numberGenerator()
 	}
-//		{
-//		
-//		Double(arc4random()) / Double(UInt32.max)
-//	}
 	
 	return la_matrix_from_double_array(values, rows: rows, columns: columns)
 }
@@ -243,7 +237,6 @@ extension la_object_t {
 		
 		assert(self.rows == secondMat.rows, "Cannot append columns from matrices of two different row dimensions")
 		
-		var selfT = la_transpose(self)
 		let secondT = la_transpose(secondMat)
 		
 		var selfArr = self.toArray()
@@ -273,7 +266,7 @@ extension la_object_t {
 	final public func toArray() -> [Double] {
 		var array = [Double](count: rows * cols, repeatedValue: 0.0)
 		
-		let status = la_matrix_to_double_buffer(&array, la_count_t(cols), self)
+		la_matrix_to_double_buffer(&array, la_count_t(cols), self)
 		
 //		assertStatusIsSuccess(status)
 		
