@@ -27,8 +27,8 @@ class OperatorPerformanceTests: XCTestCase {
 		}
 		
 		measureBlock {
-			var matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
-			var matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+			let matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
+			let matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 			
 			let result = la_matrix_product(matrix, matrix2)
 			

@@ -57,13 +57,13 @@ public func ^(left: la_object_t, right: Int) -> la_object_t {
 /**
 Construct a la_object_t for a matrix of dimensions rows x columns
 
-:param: The array to use as the elements of the matrix
-:param: The number of rows to construct the matrix
-:param: The number of columns to construct the matrix
+- parameter The: array to use as the elements of the matrix
+- parameter The: number of rows to construct the matrix
+- parameter The: number of columns to construct the matrix
 
-:returns: The la_object_t instance to use in matrix operations
+- returns: The la_object_t instance to use in matrix operations
 */
-public func la_matrix_from_double_array(var array: [Double], #rows: Int, #columns: Int) -> la_object_t {
+public func la_matrix_from_double_array(var array: [Double], rows: Int, columns: Int) -> la_object_t {
 	let columns = la_count_t(columns)
 	let rows = la_count_t(rows)
 	let totalElements = Int(rows * columns)
@@ -78,46 +78,46 @@ public func la_matrix_from_double_array(var array: [Double], #rows: Int, #column
 /**
 Construct a la_object_t for a column matrix of size array.count x 1
 
-:param: The array to use as the elements of the column matrix
+- parameter The: array to use as the elements of the column matrix
 
-:returns: The la_object_t instance to use in matrix operations
+- returns: The la_object_t instance to use in matrix operations
 */
-public func la_vector_column_from_double_array(var array: [Double]) -> la_object_t {
+public func la_vector_column_from_double_array(array: [Double]) -> la_object_t {
 	return la_matrix_from_double_array(array, rows: array.count, columns: 1)
 }
 
 /**
 Construct a la_object_t for a row matrix of size 1 x array.count
 
-:param: The array to use as the elements of the column matrix
+- parameter The: array to use as the elements of the column matrix
 
-:returns: The la_object_t instance to use in matrix operations
+- returns: The la_object_t instance to use in matrix operations
 */
-public func la_vector_row_from_double_array(var array: [Double]) -> la_object_t {
+public func la_vector_row_from_double_array(array: [Double]) -> la_object_t {
 	return la_matrix_from_double_array(array, rows: 1, columns: array.count)
 }
 
 /**
 Construct a la_object_t for a matrix of repeated values with dimensions rows x columns
 
-:param: The array to use as the elements of the matrix
-:param: The number of rows to construct the matrix, defaults to one
-:param: The number of columns to construct the matrix, defaults to one
+- parameter The: array to use as the elements of the matrix
+- parameter The: number of rows to construct the matrix, defaults to one
+- parameter The: number of columns to construct the matrix, defaults to one
 
-:returns: The la_object_t instance to use in matrix operations
+- returns: The la_object_t instance to use in matrix operations
 */
 public func la_constant_matrix(value: Double, rows: Int = 1, columns: Int = 1) -> la_object_t {
-	var matrixArray = [Double](count: rows * columns, repeatedValue: value)
+	let matrixArray = [Double](count: rows * columns, repeatedValue: value)
 	return la_matrix_from_double_array(matrixArray, rows: rows, columns: columns)
 }
 
 /**
 Construct a la_object_t for a matrix with all elements set to 0.0 of dimensions rows x columns
 
-:param: The number of rows to construct the matrix, defaults to one
-:param: The number of columns to construct the matrix, defaults to one
+- parameter The: number of rows to construct the matrix, defaults to one
+- parameter The: number of columns to construct the matrix, defaults to one
 
-:returns: The la_object_t instance to use in matrix operations
+- returns: The la_object_t instance to use in matrix operations
 */
 public func la_zero_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
 	return la_constant_matrix(0.0, rows: rows, columns: columns)
@@ -126,10 +126,10 @@ public func la_zero_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
 /**
 Construct a la_object_t for a matrix with all elements set to 1.0 of dimensions rows x columns
 
-:param: The number of rows to construct the matrix, defaults to one
-:param: The number of columns to construct the matrix, defaults to one
+- parameter The: number of rows to construct the matrix, defaults to one
+- parameter The: number of columns to construct the matrix, defaults to one
 
-:returns: The la_object_t instance to use in matrix operations
+- returns: The la_object_t instance to use in matrix operations
 */
 public func la_ones_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
 	return la_constant_matrix(1.0, rows: rows, columns: columns)
@@ -141,11 +141,11 @@ extension la_object_t {
 	/**
 	Construct a la_object_t from a Swift two dimensional array
 	
-	:param: array The array of elements from which to construct the la_object
+	- parameter array: The array of elements from which to construct the la_object
 	
-	:returns: The la_object_t instance to use in matrix operations
+	- returns: The la_object_t instance to use in matrix operations
 	*/
-	final public class func objectFromArray(array: [[Double]]) -> la_object_t {
+	final public static func objectFromArray(array: [[Double]]) -> la_object_t {
 		let rows = array.count
 		let columns = array.first?.count ?? 1
 		let totalElements = Int(rows * columns)
@@ -158,11 +158,11 @@ extension la_object_t {
 	/**
 	Construct a la_object_t identity matrix
 	
-	:param: The dimension of the square identity matrix
+	- parameter The: dimension of the square identity matrix
 	
-	:returns: The identity la_object_t instance to use in matrix operations
+	- returns: The identity la_object_t instance to use in matrix operations
 	*/
-	final public class func eye(_ dimension: Int = 1) -> la_object_t {
+	final public static func eye(_ dimension: Int = 1) -> la_object_t {
 		let size = la_count_t(dimension)
 		let scalarType = la_scalar_type_t(LA_SCALAR_TYPE_DOUBLE)
 		let attributes = la_attribute_t(LA_DEFAULT_ATTRIBUTES)
@@ -186,9 +186,9 @@ extension la_object_t {
 	/**
 	Merge two matrices by columns with the second being placed before self
 	
-	:param: secondMat The matrix to prepend
+	- parameter secondMat: The matrix to prepend
 	
-	:returns: The merged matrix
+	- returns: The merged matrix
 	*/
 	final public func prependColumnsFrom(secondMat: la_object_t) -> la_object_t {
 		return secondMat.appendColumnsFrom(self)
@@ -197,21 +197,21 @@ extension la_object_t {
 	/**
 	Merge two matrices by columns with the second being placed after self
 	
-	:param: secondMat The matrix to append
+	- parameter secondMat: The matrix to append
 	
-	:returns: The merged matrix
+	- returns: The merged matrix
 	*/
 	final public func appendColumnsFrom(secondMat: la_object_t) -> la_object_t {
 		
 		assert(self.rows == secondMat.rows, "Cannot append columns from matrices of two different row dimensions")
 		
 		var selfT = la_transpose(self)
-		var secondT = la_transpose(secondMat)
+		let secondT = la_transpose(secondMat)
 		
 		var selfArr = self.toArray()
-		selfArr.extend(secondT.toArray())
+		selfArr.appendContentsOf(secondT.toArray())
 		
-		var end = la_matrix_from_double_array(selfArr, rows: self.cols + secondMat.cols, columns: self.rows)
+		let end = la_matrix_from_double_array(selfArr, rows: self.cols + secondMat.cols, columns: self.rows)
 		return la_transpose(end)
 	}
 	
@@ -230,7 +230,7 @@ extension la_object_t {
 	/**
 	Generate a swift array of elements from the la_object_t instance
 	
-	:returns: A one dimensional swift array with all the elements from the la_object_t instance
+	- returns: A one dimensional swift array with all the elements from the la_object_t instance
 	*/
 	final public func toArray() -> [Double] {
 		var array = [Double](count: rows * cols, repeatedValue: 0.0)
@@ -254,7 +254,7 @@ extension la_object_t {
 	/**
 	la_status_t to friendly string converter
 	
-	:param: status The status returned from the matrix operation
+	- parameter status: The status returned from the matrix operation
 	*/
 	final private func assertStatusIsSuccess(status: la_status_t) {
 		switch Int32(status) {
@@ -286,15 +286,15 @@ extension la_object_t {
 		
 		let outputArray = toArray()
 		
-        let rowDescriptions = map(0..<rows) { x -> String in
-            let valDescriptions = map(0..<self.cols) { y -> String in
+        let rowDescriptions = (0..<rows).map { x -> String in
+            let valDescriptions = (0..<self.cols).map { y -> String in
                 outputArray[Int(y + x * self.cols)].description
             }
-            let commaJoinedVals = ", ".join(valDescriptions)
+            let commaJoinedVals = valDescriptions.joinWithSeparator(", ")
             return commaJoinedVals
         }
         
-        let rowsJoinedByLine = "\n".join(rowDescriptions)
+        let rowsJoinedByLine = rowDescriptions.joinWithSeparator("\n")
 		
 		return rowsJoinedByLine
 	}

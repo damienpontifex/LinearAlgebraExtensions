@@ -151,7 +151,7 @@ class LinearRegressionTests: XCTestCase {
 		
 		let results = linear.gradientDescent(returnCostHistory: true)
 		
-		println(results)
+		print(results)
 	}
 	
 	func testNormalEquation() {

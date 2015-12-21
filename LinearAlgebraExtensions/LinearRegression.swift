@@ -25,7 +25,7 @@ public class LinearRegression {
 		self.m = Int(la_matrix_rows(x))
 		let cols = Int(la_matrix_cols(x))
 		
-		let ones = la_ones_matrix(rows: Int(la_matrix_rows(x)))
+		let ones = la_ones_matrix(Int(la_matrix_rows(x)))
 		self.x = x.prependColumnsFrom(ones)
 		self.y = y
 		
@@ -41,23 +41,23 @@ public class LinearRegression {
 	/**
 	Initialise the LinearRegression object
 	
-	:param: x             Input data values
-	:param: y             Expected output values
-	:param: theta         Initial theta value
-	:param: alpha         Learning rate
-	:param: numIterations Number of iterations to run the algorithm
+	- parameter x:             Input data values
+	- parameter y:             Expected output values
+	- parameter theta:         Initial theta value
+	- parameter alpha:         Learning rate
+	- parameter numIterations: Number of iterations to run the algorithm
 	
-	:returns: Instance of the LinearRegression
+	- returns: Instance of the LinearRegression
 	*/
 	public init(_ x: [Double], _ y: [Double], theta: [Double]? = nil, alpha: Double = 0.01, numIterations: Int = 1500) {
 		self.m = x.count
 		
 		var xValues = Array<Double>(count: m * 2, repeatedValue: 1.0)
-		for i in stride(from: 0, to: x.count * 2, by: 2) {
+		for i in 0.stride(to: x.count * 2, by: 2) {
 			xValues[i] = x[i / 2]
 		}
 		
-		var xMatrix = la_matrix_from_double_array(xValues, rows: m, columns: 2)
+		let xMatrix = la_matrix_from_double_array(xValues, rows: m, columns: 2)
 		
 		self.x = xMatrix
 		
@@ -75,15 +75,15 @@ public class LinearRegression {
 	/**
 	Run the gradient descent algorithm for linear regression
 	
-	:param: returnCostHistory Boolean value to indicate whether the cost history should be returned. Some performance hit if this is true due to doing array computations in every iteration rather than just at the end
+	- parameter returnCostHistory: Boolean value to indicate whether the cost history should be returned. Some performance hit if this is true due to doing array computations in every iteration rather than just at the end
 	
-	:returns: Tuple of theta values and optional jHistory parameter if requested
+	- returns: Tuple of theta values and optional jHistory parameter if requested
 	*/
 	public func gradientDescent(returnCostHistory: Bool = false) -> (theta: [Double], jHistory: [Double]?) {
 		
-		println("initial theta \(theta.description())")
-		println(x.description())
-		println(y.description())
+		print("initial theta \(theta.description())")
+		print(x.description())
+		print(y.description())
 		
 		// Number of training examples
 		let alphaOverM = alpha / Double(m)
@@ -104,7 +104,7 @@ public class LinearRegression {
 			// theta_j = theta_j - alpha / m * sum_{i=1}^m (h_theta(x^(i)) - y^(i)) * x_j^(i)
 			theta = theta - partial
 			
-			println("next theta \(theta.description())")
+			print("next theta \(theta.description())")
 			
 			if returnCostHistory {
 				jHistory![iter] = computeCost()
@@ -119,12 +119,12 @@ public class LinearRegression {
 	/**
 	Calculate theta values using the normal equations.
 	
-	:returns: Double array with theta coefficients
+	- returns: Double array with theta coefficients
 	*/
 	public func normalEquations() -> [Double] {
 		// 𝜃 = inverse(X' * X) * X' * y
 		// Equivalent to (X' * X) * 𝜃 = X' * y hence can use la_solve
-		var newTheta = la_solve(la_transpose(x) * x, la_transpose(x) * y)
+		let newTheta = la_solve(la_transpose(x) * x, la_transpose(x) * y)
 		
 		return newTheta.toArray()
 	}
@@ -132,7 +132,7 @@ public class LinearRegression {
 	/**
 	Computes the cost with our current values of theta
 	
-	:returns: Cost value for the data with value of theta
+	- returns: Cost value for the data with value of theta
 	*/
 	public func computeCost() -> Double {
 		

@@ -268,6 +268,8 @@
 		F3AEBE66198E480C00EDE7F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Damien Pontifex";
 				TargetAttributes = {

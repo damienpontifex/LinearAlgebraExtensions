@@ -40,8 +40,8 @@ class OperatorTests: XCTestCase {
 		var result = sumMatrix.toArray()
 		
 		// Verify
-		for (y, array) in enumerate(twoDArray) {
-			for (x, array) in enumerate(array) {
+		for (y, array) in twoDArray.enumerate() {
+			for (x, array) in array.enumerate() {
 				
 				let originalElement = twoDArray[x][y] * 2
 				let resultElement = result[y + x * cols]
