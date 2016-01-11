@@ -44,7 +44,7 @@ public func /(left: la_object_t, right: Double) -> la_object_t {
 
 public func ^(left: la_object_t, right: Int) -> la_object_t {
 	var result: la_object_t?
-	for i in 1..<right {
+	for _ in 1..<right {
 		if result == nil {
 			result = la_matrix_product(left, left)
 		} else {
@@ -66,7 +66,6 @@ Construct a la_object_t for a matrix of dimensions rows x columns
 public func la_matrix_from_double_array(var array: [Double], rows: Int, columns: Int) -> la_object_t {
 	let columns = la_count_t(columns)
 	let rows = la_count_t(rows)
-	let totalElements = Int(rows * columns)
 	
 	let stride = columns
 	var matrix: la_object_t!
@@ -162,7 +161,7 @@ extension la_object_t {
 	
 	- returns: The identity la_object_t instance to use in matrix operations
 	*/
-	final public static func eye(_ dimension: Int = 1) -> la_object_t {
+	final public static func eye(dimension: Int = 1) -> la_object_t {
 		let size = la_count_t(dimension)
 		let scalarType = la_scalar_type_t(LA_SCALAR_TYPE_DOUBLE)
 		let attributes = la_attribute_t(LA_DEFAULT_ATTRIBUTES)
