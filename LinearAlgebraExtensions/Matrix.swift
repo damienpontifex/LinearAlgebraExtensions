@@ -134,6 +134,24 @@ public func la_ones_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
 	return la_constant_matrix(1.0, rows: rows, columns: columns)
 }
 
+/**
+Construct a la_object_t for a matrix with random numbers between 0.0 and 1.0 of dimensions rows x columns
+
+-parameter:		The number of rows to construct the matrix, defaults to one
+- parameter:	The number of columns to construct the matrix, defaults to one
+
+- returns:		The la_object_t instance to use in matrix operations
+*/
+public func la_rand_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {	
+	let max = Double(UInt32.max)
+	
+	let values = (0..<rows*columns).map { _ in 
+		return Double(arc4random()) / max
+	}
+	
+	return la_matrix_from_double_array(values, rows: rows, columns: columns)
+}
+
 //MARK: - Object construction
 extension la_object_t {
 	
