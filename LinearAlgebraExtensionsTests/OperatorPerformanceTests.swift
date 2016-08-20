@@ -20,20 +20,20 @@ class OperatorPerformanceTests: XCTestCase {
 		
 		let rowDim = la_count_t(squareDim)
 		
-		var array = [Double](count: elementCount, repeatedValue: initial)
+		var array = [Double](repeating: initial, count: elementCount)
 		
 		for i in 0..<elementCount {
 			array[i] = Double(arc4random_uniform(100))
 		}
 		
-		measureBlock {
+		measure {
 			let matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 			let matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 			
 			let result = la_matrix_product(matrix, matrix2)
 			
 			// Have to actually call it out for execution to occur
-			var outArray = Array<Double>(count: elementCount, repeatedValue: 0.0)
+			var outArray = Array<Double>(repeating: 0.0, count: elementCount)
 			_ = la_matrix_to_double_buffer(&outArray, rowDim, result)
 		}
 	}
@@ -47,20 +47,20 @@ class OperatorPerformanceTests: XCTestCase {
 		
 		let rowDim = la_count_t(squareDim)
 		
-		var array = [Double](count: elementCount, repeatedValue: initial)
+		var array = [Double](repeating: initial, count: elementCount)
 		
 		for i in 0..<elementCount {
 			array[i] = Double(arc4random_uniform(100))
 		}
 		
-		measureBlock {
+		measure {
 			let matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 			let matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 			
 			let result = matrix * matrix2
 			
 			// Have to actually call it out for execution to occur
-			var array = Array<Double>(count: elementCount, repeatedValue: 0.0)
+			var array = Array<Double>(repeating: 0.0, count: elementCount)
 			_ = la_matrix_to_double_buffer(&array, rowDim, result)
 		}
 	}
@@ -74,7 +74,7 @@ class OperatorPerformanceTests: XCTestCase {
 		
 		let rowDim = la_count_t(squareDim)
 		
-		var array = [Double](count: elementCount, repeatedValue: initial)
+		var array = [Double](repeating: initial, count: elementCount)
 		
 		for i in 0..<elementCount {
 			array[i] = Double(arc4random_uniform(100))
@@ -85,7 +85,7 @@ class OperatorPerformanceTests: XCTestCase {
 		
 		let result = la_matrix_product(matrix, matrix2)
 		
-		measureBlock {
+		measure {
 			// Have to actually call it out for execution to occur
 			_ = result.toArray()
 		}
@@ -99,7 +99,7 @@ class OperatorPerformanceTests: XCTestCase {
 		
 		let rowDim = la_count_t(squareDim)
 		
-		var array = [Double](count: elementCount, repeatedValue: initial)
+		var array = [Double](repeating: initial, count: elementCount)
 		
 		for i in 0..<elementCount {
 			array[i] = Double(arc4random_uniform(100))
@@ -108,7 +108,7 @@ class OperatorPerformanceTests: XCTestCase {
 		let matrix = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 		let matrix2 = la_matrix_from_double_buffer(&array, rowDim, rowDim, rowDim, 0, 0)
 		
-		measureBlock {
+		measure {
 			let result = matrix * matrix2
 			
 			// Have to actually call it out for execution to occur
@@ -125,14 +125,14 @@ class OperatorPerformanceTests: XCTestCase {
 		_ = vDSP_Stride(squareDim)
 		let length = vDSP_Length(squareDim)
 		
-		var array = [Double](count: elementCount, repeatedValue: initial)
+		var array = [Double](repeating: initial, count: elementCount)
 		
 		for i in 0..<elementCount {
 			array[i] = Double(arc4random_uniform(100))
 		}
 		
-		measureBlock {
-			var vsresult = [Double](count : array.count, repeatedValue : 0.0)
+		measure {
+			var vsresult = [Double](repeating: 0.0, count: array.count)
 			vDSP_mmulD(&array, 1, &array, 1, &vsresult, 1, length, length, length)
 		}
 	}

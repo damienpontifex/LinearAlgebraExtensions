@@ -36,8 +36,8 @@ class OperatorTests: XCTestCase {
 		let sumMatrix = matrix + matrix2
 		
 		// Verify
-		for (y, array) in twoDArray.enumerate() {
-			for (x, _) in array.enumerate() {
+		for (y, array) in twoDArray.enumerated() {
+			for (x, _) in array.enumerated() {
 				
 				let originalElement = twoDArray[x][y] * 2
 				let resultElement = sumMatrix[x, y]

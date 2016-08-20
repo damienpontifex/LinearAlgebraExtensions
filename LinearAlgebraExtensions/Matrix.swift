@@ -63,7 +63,7 @@ Construct a la_object_t for a matrix of dimensions rows x columns
 
 - returns: The la_object_t instance to use in matrix operations
 */
-public func la_matrix_from_double_array(array: [Double], rows: Int, columns: Int) -> la_object_t {
+public func la_matrix_from_double_array(_ array: [Double], rows: Int, columns: Int) -> la_object_t {
 	let columns = la_count_t(columns)
 	let rows = la_count_t(rows)
 	
@@ -82,7 +82,7 @@ Construct a la_object_t for a column matrix of size array.count x 1
 
 - returns: The la_object_t instance to use in matrix operations
 */
-public func la_vector_column_from_double_array(array: [Double]) -> la_object_t {
+public func la_vector_column_from_double_array(_ array: [Double]) -> la_object_t {
 	return la_matrix_from_double_array(array, rows: array.count, columns: 1)
 }
 
@@ -93,7 +93,7 @@ Construct a la_object_t for a row matrix of size 1 x array.count
 
 - returns: The la_object_t instance to use in matrix operations
 */
-public func la_vector_row_from_double_array(array: [Double]) -> la_object_t {
+public func la_vector_row_from_double_array(_ array: [Double]) -> la_object_t {
 	return la_matrix_from_double_array(array, rows: 1, columns: array.count)
 }
 
@@ -106,8 +106,8 @@ Construct a la_object_t for a matrix of repeated values with dimensions rows x c
 
 - returns: The la_object_t instance to use in matrix operations
 */
-public func la_constant_matrix(value: Double, rows: Int = 1, columns: Int = 1) -> la_object_t {
-	let matrixArray = [Double](count: rows * columns, repeatedValue: value)
+public func la_constant_matrix(_ value: Double, rows: Int = 1, columns: Int = 1) -> la_object_t {
+	let matrixArray = [Double](repeating: value, count: rows * columns)
 	return la_matrix_from_double_array(matrixArray, rows: rows, columns: columns)
 }
 
@@ -119,7 +119,7 @@ Construct a la_object_t for a matrix with all elements set to 0.0 of dimensions 
 
 - returns: The la_object_t instance to use in matrix operations
 */
-public func la_zero_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
+public func la_zero_matrix(_ rows: Int = 1, columns: Int = 1) -> la_object_t {
 	return la_constant_matrix(0.0, rows: rows, columns: columns)
 }
 
@@ -131,7 +131,7 @@ Construct a la_object_t for a matrix with all elements set to 1.0 of dimensions 
 
 - returns: The la_object_t instance to use in matrix operations
 */
-public func la_ones_matrix(rows rows: Int = 1, columns: Int = 1) -> la_object_t {
+public func la_ones_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {
 	return la_constant_matrix(1.0, rows: rows, columns: columns)
 }
 
@@ -143,7 +143,7 @@ Construct a la_object_t for a matrix with random numbers between 0.0 and 1.0 of 
 
 - returns:		The la_object_t instance to use in matrix operations
 */
-public func la_rand_matrix(rows: Int = 1, columns: Int = 1) -> la_object_t {	
+public func la_rand_matrix(_ rows: Int = 1, columns: Int = 1) -> la_object_t {	
 	let max = Double(UInt32.max)
 	
 	let values = (0..<rows*columns).map { _ in 
@@ -160,7 +160,7 @@ Construct a la_object_t from a Swift two dimensional array
 
 - returns: The la_object_t instance to use in matrix operations
 */
-public func la_matrix_from_array(array: [[Double]]) -> la_object_t {
+public func la_matrix_from_array(_ array: [[Double]]) -> la_object_t {
     let rows = array.count
     let columns = array.first?.count ?? 1
 //		let totalElements = Int(rows * columns)
@@ -177,7 +177,7 @@ Construct a la_object_t identity matrix
 
 - returns: The identity la_object_t instance to use in matrix operations
 */
-public func la_matrix_identity(dimension: Int = 1) -> la_object_t {
+public func la_matrix_identity(_ dimension: Int = 1) -> la_object_t {
     let size = la_count_t(dimension)
     let scalarType = la_scalar_type_t(LA_SCALAR_TYPE_DOUBLE)
     let attributes = la_attribute_t(LA_DEFAULT_ATTRIBUTES)
@@ -204,7 +204,7 @@ extension la_object_t {
 	
 	- returns: The merged matrix
 	*/
-	final public func prependColumnsFrom(secondMat: la_object_t) -> la_object_t {
+	final public func prependColumnsFrom(_ secondMat: la_object_t) -> la_object_t {
 		return secondMat.appendColumnsFrom(self)
 	}
 	
@@ -215,7 +215,7 @@ extension la_object_t {
 	
 	- returns: The merged matrix
 	*/
-	final public func appendColumnsFrom(secondMat: la_object_t) -> la_object_t {
+	final public func appendColumnsFrom(_ secondMat: la_object_t) -> la_object_t {
 		
 		assert(self.rows == secondMat.rows, "Cannot append columns from matrices of two different row dimensions")
 		
@@ -223,7 +223,7 @@ extension la_object_t {
 		let secondT = la_transpose(secondMat)
 		
 		var selfArr = self.toArray()
-		selfArr.appendContentsOf(secondT.toArray())
+		selfArr.append(contentsOf: secondT.toArray())
 		
 		let end = la_matrix_from_double_array(selfArr, rows: self.cols + secondMat.cols, columns: self.rows)
 		return la_transpose(end)
@@ -238,7 +238,7 @@ extension la_object_t {
 	*  @return A new la_object_t instance with the subset of the original object from the specified rows and columns
 	*/
 	final public subscript(rowRange: Range<Int>, colRange: Range<Int>) -> la_object_t {
-		return la_matrix_slice(self, rowRange.startIndex, colRange.startIndex, 0, 0, la_count_t(rowRange.endIndex - rowRange.startIndex), la_count_t(colRange.endIndex - colRange.startIndex))
+		return la_matrix_slice(self, rowRange.lowerBound, colRange.lowerBound, 0, 0, la_count_t(rowRange.upperBound - rowRange.lowerBound), la_count_t(colRange.upperBound - colRange.lowerBound))
 	}
 	
 	/**
@@ -247,7 +247,7 @@ extension la_object_t {
 	- returns: A one dimensional swift array with all the elements from the la_object_t instance
 	*/
 	final public func toArray() -> [Double] {
-		var array = [Double](count: rows * cols, repeatedValue: 0.0)
+		var array = [Double](repeating: 0.0, count: rows * cols)
 		
 		_ = la_matrix_to_double_buffer(&array, la_count_t(cols), self)
 		
@@ -270,7 +270,7 @@ extension la_object_t {
 	
 	- parameter status: The status returned from the matrix operation
 	*/
-	final private func assertStatusIsSuccess(status: la_status_t) {
+	final fileprivate func assertStatusIsSuccess(_ status: la_status_t) {
 		switch Int32(status) {
 		case LA_WARNING_POORLY_CONDITIONED:
 			assert(false, "Poorly conditioned")
@@ -304,11 +304,11 @@ extension la_object_t {
             let valDescriptions = (0..<self.cols).map { y -> String in
                 outputArray[Int(y + x * self.cols)].description
             }
-            let commaJoinedVals = valDescriptions.joinWithSeparator(", ")
+            let commaJoinedVals = valDescriptions.joined(separator: ", ")
             return commaJoinedVals
         }
         
-        let rowsJoinedByLine = rowDescriptions.joinWithSeparator("\n")
+        let rowsJoinedByLine = rowDescriptions.joined(separator: "\n")
 		
 		return rowsJoinedByLine
 	}

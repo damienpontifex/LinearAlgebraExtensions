@@ -183,14 +183,14 @@ class MatrixTests: XCTestCase {
 	func testMergeFunction() {
 		// Extend the values so it takes more time, for better comparison
 		for _ in 0..<5 {
-			x2.appendContentsOf(x2)
+			x2.append(contentsOf: x2)
 		}
 		let cols = 2
 		let m = x2.count / 2
 		let xMat = la_matrix_from_double_array(x2, rows: m, columns: cols)
 		let ones = la_ones_matrix(rows: xMat.rows)
 		
-		measureBlock {
+		measure {
 			_ = ones.appendColumnsFrom(xMat)
 		}
 	}

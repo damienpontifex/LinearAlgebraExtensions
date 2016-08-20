@@ -12,14 +12,14 @@ import Accelerate
 /**
 *  Class to calculate linear regression of a set of data points
 */
-public class LinearRegression {
+open class LinearRegression {
 	
-	private var m: Int
-	private var x: la_object_t
-	private var y: la_object_t
-	private var theta: la_object_t
-	private var alpha: Double
-	private var numIterations: Int
+	fileprivate var m: Int
+	fileprivate var x: la_object_t
+	fileprivate var y: la_object_t
+	fileprivate var theta: la_object_t
+	fileprivate var alpha: Double
+	fileprivate var numIterations: Int
 	
 	public init(_ x: la_object_t, _ y: la_object_t, theta: la_object_t? = nil, alpha: Double = 0.01, numIterations: Int = 1500) {
 		self.m = Int(la_matrix_rows(x))
@@ -52,8 +52,8 @@ public class LinearRegression {
 	public init(_ x: [Double], _ y: [Double], theta: [Double]? = nil, alpha: Double = 0.01, numIterations: Int = 1500) {
 		self.m = x.count
 		
-		var xValues = Array<Double>(count: m * 2, repeatedValue: 1.0)
-		for i in 0.stride(to: x.count * 2, by: 2) {
+		var xValues = Array<Double>(repeating: 1.0, count: m * 2)
+		for i in stride(from: 0, to: x.count * 2, by: 2) {
 			xValues[i] = x[i / 2]
 		}
 		
@@ -65,7 +65,7 @@ public class LinearRegression {
 		var thetaArray = theta
 		if thetaArray == nil {
 			// Default the theta array to zeros with appropriate size of x array
-			thetaArray = Array<Double>(count: Int(2), repeatedValue: 0.0)
+			thetaArray = Array<Double>(repeating: 0.0, count: Int(2))
 		}
 		self.theta = la_vector_row_from_double_array(thetaArray!)
 		self.alpha = alpha
@@ -79,7 +79,7 @@ public class LinearRegression {
 	
 	- returns: Tuple of theta values and optional jHistory parameter if requested
 	*/
-	public func gradientDescent(returnCostHistory: Bool = false) -> (theta: [Double], jHistory: [Double]?) {
+	open func gradientDescent(_ returnCostHistory: Bool = false) -> (theta: [Double], jHistory: [Double]?) {
 		
 		print("initial theta \(theta.description())")
 		print(x.description())
@@ -90,7 +90,7 @@ public class LinearRegression {
 		
 		var jHistory: [Double]?
 		if returnCostHistory {
-			jHistory = Array<Double>(count: numIterations, repeatedValue: 0.0)
+			jHistory = Array<Double>(repeating: 0.0, count: numIterations)
 		}
 		
 		for iter in 0..<numIterations {
@@ -121,7 +121,7 @@ public class LinearRegression {
 	
 	- returns: Double array with theta coefficients
 	*/
-	public func normalEquations() -> [Double] {
+	open func normalEquations() -> [Double] {
 		// 𝜃 = inverse(X' * X) * X' * y
 		// Equivalent to (X' * X) * 𝜃 = X' * y hence can use la_solve
 		let newTheta = la_solve(la_transpose(x) * x, la_transpose(x) * y)
@@ -134,7 +134,7 @@ public class LinearRegression {
 	
 	- returns: Cost value for the data with value of theta
 	*/
-	public func computeCost() -> Double {
+	open func computeCost() -> Double {
 		
 		let twoM = 2.0 * Double(m)
 		
