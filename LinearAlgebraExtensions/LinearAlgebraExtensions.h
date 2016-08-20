@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Damien Pontifex. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for LinearAlgebraExtensions.
 FOUNDATION_EXPORT double LinearAlgebraExtensionsVersionNumber;
