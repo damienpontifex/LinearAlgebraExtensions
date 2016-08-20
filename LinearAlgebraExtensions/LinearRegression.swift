@@ -23,9 +23,9 @@ public class LinearRegression {
 	
 	public init(_ x: la_object_t, _ y: la_object_t, theta: la_object_t? = nil, alpha: Double = 0.01, numIterations: Int = 1500) {
 		self.m = Int(la_matrix_rows(x))
-		let cols = Int(la_matrix_cols(x))
+//		let cols = Int(la_matrix_cols(x))
 		
-		let ones = la_ones_matrix(Int(la_matrix_rows(x)))
+		let ones = la_ones_matrix(rows: Int(la_matrix_rows(x)))
 		self.x = x.prependColumnsFrom(ones)
 		self.y = y
 		

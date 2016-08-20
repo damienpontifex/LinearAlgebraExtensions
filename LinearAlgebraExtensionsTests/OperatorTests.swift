@@ -14,10 +14,10 @@ class OperatorTests: XCTestCase {
 	
 	func testMatrixMultiplyOperator() {
 		let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
-		var matrix = la_object_t.objectFromArray(twoDArray) as la_object_t
-		var matrix2 = la_object_t.objectFromArray(twoDArray) as la_object_t
+		let matrix = la_matrix_from_array(twoDArray)
+		let matrix2 = la_matrix_from_array(twoDArray)
 		
-		var multiplyMatrix = matrix * matrix2
+		let multiplyMatrix = matrix * matrix2
 		
 		XCTAssertEqual(la_matrix_cols(multiplyMatrix), la_count_t(3), "Should have same dimension result")
 		XCTAssertEqual(la_matrix_rows(multiplyMatrix), la_count_t(3), "Should have same dimension result")
@@ -28,23 +28,19 @@ class OperatorTests: XCTestCase {
 	}
 	
 	func testMatrixAddOperator() {
-		let rows = 3
-		let cols = 3
 		
 		let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
-		var matrix = la_object_t.objectFromArray(twoDArray)
-		var matrix2 = la_object_t.objectFromArray(twoDArray)
+		let matrix = la_matrix_from_array(twoDArray)
+		let matrix2 = la_matrix_from_array(twoDArray)
 		
-		var sumMatrix = matrix + matrix2
-		
-		var result = sumMatrix.toArray()
+		let sumMatrix = matrix + matrix2
 		
 		// Verify
 		for (y, array) in twoDArray.enumerate() {
-			for (x, array) in array.enumerate() {
+			for (x, _) in array.enumerate() {
 				
 				let originalElement = twoDArray[x][y] * 2
-				let resultElement = result[y + x * cols]
+				let resultElement = sumMatrix[x, y]
 				
 				XCTAssertEqual(originalElement, resultElement, "Should have equal elements at (\(x), \(y))")
 			}

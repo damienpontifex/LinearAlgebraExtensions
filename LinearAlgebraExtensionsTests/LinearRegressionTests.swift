@@ -130,7 +130,7 @@ class LinearRegressionTests: XCTestCase {
 		let linear = LinearRegression(x, y)
 		let initialCost = linear.computeCost()
 		
-		XCTAssertEqualWithAccuracy(initialCost, 32.0727, 0.005, "Should have this value for initial cost")
+		XCTAssertEqualWithAccuracy(initialCost, 32.0727, accuracy: 0.005, "Should have this value for initial cost")
 	}
 
     func testLinearRegression() {
@@ -139,8 +139,8 @@ class LinearRegressionTests: XCTestCase {
 		
 		let results = linear.gradientDescent()
 
-		XCTAssertEqualWithAccuracy(results.theta[0], 1.166362, 0.5, "Should have this for first element")
-		XCTAssertEqualWithAccuracy(results.theta[1], -3.630291, 0.5, "Should have this for second element")
+		XCTAssertEqualWithAccuracy(results.theta[0], 1.166362, accuracy: 0.5, "Should have this for first element")
+		XCTAssertEqualWithAccuracy(results.theta[1], -3.630291, accuracy: 0.5, "Should have this for second element")
     }
 	
 	func testMultiVariateLinearRegression() {
@@ -149,7 +149,7 @@ class LinearRegressionTests: XCTestCase {
 		
 		let linear = LinearRegression(x2Mat, y2Mat, numIterations: 400)
 		
-		let results = linear.gradientDescent(returnCostHistory: true)
+		let results = linear.gradientDescent(true)
 		
 		print(results)
 	}
@@ -159,7 +159,7 @@ class LinearRegressionTests: XCTestCase {
 		let linear = LinearRegression(x, y)
 		
 		let theta = linear.normalEquations()
-		XCTAssertEqualWithAccuracy(theta[1], -3.630291, 0.5, "Should have this for first element")
-		XCTAssertEqualWithAccuracy(theta[0], 1.166362, 0.5, "Should have this for second element")
+		XCTAssertEqualWithAccuracy(theta[1], -3.630291, accuracy: 0.5, "Should have this for first element")
+		XCTAssertEqualWithAccuracy(theta[0], 1.166362, accuracy: 0.5, "Should have this for second element")
 	}
 }

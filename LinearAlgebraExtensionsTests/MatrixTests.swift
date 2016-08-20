@@ -121,7 +121,7 @@ class MatrixTests: XCTestCase {
     
     func testSubscriptAccess() {
         let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
-        var matrix = la_object_t.objectFromArray(twoDArray)
+        let matrix = la_matrix_from_array(twoDArray)
         
         XCTAssertNil(matrix[-1, -1])
         
@@ -131,7 +131,7 @@ class MatrixTests: XCTestCase {
 
 	func testConstructorFromArray() {
 		let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
-		var matrix = la_object_t.objectFromArray(twoDArray)
+		var matrix = la_matrix_from_array(twoDArray)
 		
 		let rhs = 2.0
 		let scalarSplat = la_splat_from_double(rhs, 0)
@@ -143,14 +143,14 @@ class MatrixTests: XCTestCase {
 	
 	func testMatrixDescription() {
 		let twoDArray = [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]
-		var matrix = la_object_t.objectFromArray(twoDArray)
+		let matrix = la_matrix_from_array(twoDArray)
 		print(matrix.description())
 		let description = matrix.description()
 		XCTAssertNotNil(description, "Should have provided matrix description")
 	}
 	
 	func testIdentityConstructor() {
-		let identity = la_object_t.eye(5)
+		let identity = la_matrix_identity(5)
 		let identityArray = identity.toArray()
 		
 		for x in 0..<5 {
@@ -166,16 +166,16 @@ class MatrixTests: XCTestCase {
 	
 	func testPrependingColumn() {
 		
-		var x = [2.0, 2.0, 3.0, 3.0]
+		let x = [2.0, 2.0, 3.0, 3.0]
 		let cols = 2
 		let rows = 2
-		var xMat = la_matrix_from_double_array(x, rows: rows, columns: cols)
-		var ones = la_ones_matrix(rows: xMat.rows)
-		var newMat = xMat.prependColumnsFrom(ones)
+		let xMat = la_matrix_from_double_array(x, rows: rows, columns: cols)
+        let ones = la_ones_matrix(rows: xMat.rows)
+		let newMat = xMat.prependColumnsFrom(ones)
 		
-		var newArray = newMat.toArray()
+		let newArray = newMat.toArray()
 
-		var expectedResult = [1.0, 2.0, 2.0, 1.0, 3.0, 3.0]
+		let expectedResult = [1.0, 2.0, 2.0, 1.0, 3.0, 3.0]
 		XCTAssertEqual(newArray, expectedResult, "Expecting given array")
 	}
 	
@@ -186,12 +186,12 @@ class MatrixTests: XCTestCase {
 			x2.appendContentsOf(x2)
 		}
 		let cols = 2
-		var m = x2.count / 2
-		var xMat = la_matrix_from_double_array(x2, rows: m, columns: cols)
-		var ones = la_ones_matrix(rows: xMat.rows)
+		let m = x2.count / 2
+		let xMat = la_matrix_from_double_array(x2, rows: m, columns: cols)
+		let ones = la_ones_matrix(rows: xMat.rows)
 		
 		measureBlock {
-			var newMat = ones.appendColumnsFrom(xMat)
+			_ = ones.appendColumnsFrom(xMat)
 		}
 	}
 }
